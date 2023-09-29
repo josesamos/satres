@@ -1,0 +1,19 @@
+---
+title: "satres"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{satres}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(satres)
+```
