@@ -1,0 +1,2 @@
+# satres
+Satellite file resolution
