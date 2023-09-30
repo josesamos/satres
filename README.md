@@ -23,9 +23,9 @@ bands to apply the operations.
 
 The goal of `satres` is to partially automate these operations. We can
 use it to decompress all the downloaded files in a single operation. It
-is enough to indicate the folder that contains the decompressed files.
+is enough to indicate the folder that contains the decompressed files:
 Satellite bands are automatically obtained by name and spatial
-resolution. If we have several files to cover a geographical area, the
+resolution; if we have several files to cover a geographical area, the
 corresponding bands are automatically merged. The result can be stored
 on disk and can also be obtained as objects of class `SpatRaster` of
 package `terra`.
@@ -46,3 +46,14 @@ devtools::install_github("josesamos/satres")
 ```
 
 ## Example
+
+To cover the area of the municipality of Lanjarón (Granada), I have
+downloaded two satellite band files from the *ESA* website.
+
+- `S2A_MSIL2A_20230905T105621_N0509_R094_T30SVF_20230905T170700.zip`:
+  0.91 GB
+- `S2A_MSIL2A_20230905T105621_N0509_R094_T30SVG_20230905T170700.zip`:
+  1.14 GB
+
+I have unzipped them directly into the `datos/esa` folder, creating two
+subfolders.
