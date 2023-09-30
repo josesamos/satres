@@ -45,6 +45,8 @@ bands (B1 to B12) or all available files.
 \code{\link{sat_untarzip}}
 
 Other satellite functions: 
+\code{\link{as_SpatRaster}()},
+\code{\link{get_spatial_resolutions}()},
 \code{\link{save_by_resolution}()}
 }
 \concept{satellite functions}

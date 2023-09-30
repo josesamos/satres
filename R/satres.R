@@ -173,6 +173,35 @@ get_spatial_resolutions.satres <- function(sr) {
 }
 
 
+#' As `terra` `SpatRaster` class
+#'
+#' Returns as an object of class `SpatRaster` from package `terra` the
+#' multi-band raster of the indicated spatial resolution.
+#'
+#' @param sr A `satres` object.
+#' @param res A string, spatial resolution.
+#'
+#' @return A vector of strings.
+#'
+#' @family satellite functions
+#' @seealso \code{\link{sat_untarzip}}
+#'
+#' @examples
+#' # tsr <- sr |>
+#' #        as_SpatRaster("r10m")
+#'
+#' @export
+as_SpatRaster <- function(sr, res)
+  UseMethod("as_SpatRaster")
+
+
+#' @rdname as_SpatRaster
+#' @export
+as_SpatRaster.satres <- function(sr, res = NULL) {
+  stopifnot("A spatial resolution must be indicated." = !is.null(res))
+  stopifnot("The spatial resolution is not available." = res %in% names(sr$bands))
+  sr$bands[[res]]
+}
 
 
 #' Transforms a list of raster bands in a raster multi-band

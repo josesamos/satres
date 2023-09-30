@@ -2,7 +2,7 @@
 % Please edit documentation in R/satres.R
 \name{transform_to_multiband}
 \alias{transform_to_multiband}
-\title{Transform to multi band}
+\title{Transforms a list of raster bands in a raster multi-band}
 \usage{
 transform_to_multiband(bands)
 }
@@ -13,6 +13,8 @@ transform_to_multiband(bands)
 A raster band.
 }
 \description{
-Transforms a list of raster bands in a raster band.
+To generate a multi-band raster, the definition of the vector must be
+executed in a single instruction, which is why it must be done through
+meta programming.
 }
 \keyword{internal}

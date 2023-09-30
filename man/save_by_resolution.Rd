@@ -3,7 +3,7 @@
 \name{save_by_resolution}
 \alias{save_by_resolution}
 \alias{save_by_resolution.satres}
-\title{Get the page information of a pivot table}
+\title{Save multi-band rasters according to their spatial resolution}
 \usage{
 save_by_resolution(sr, out_dir)
 
@@ -18,15 +18,12 @@ save_by_resolution(sr, out_dir)
 A \code{satres} object.
 }
 \description{
-Get the page information associated with the pivot table represented by the
-object.
+Saves multi-band raster files of the object according to its spatial
+resolution. The file names correspond to the resolution of each one.
 }
 \details{
-Each pivot table implements a report. The pivot table page represents the
-context of that report. It is useful when we work with several pivot tables
-with the same structure: for example, the page can allow us to differentiate
-their origin, date or author. This information is often included in the file
-name, sheet name, or cells attached to the pivot table.
+They are stored in the folder that is indicated or, if none is indicated, in
+the folder that was used to create the object.
 }
 \examples{
 # sr <- sr |>
@@ -37,6 +34,8 @@ name, sheet name, or cells attached to the pivot table.
 \code{\link{sat_untarzip}}
 
 Other satellite functions: 
+\code{\link{as_SpatRaster}()},
+\code{\link{get_spatial_resolutions}()},
 \code{\link{satres}()}
 }
 \concept{satellite functions}
