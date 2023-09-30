@@ -45,4 +45,7 @@ folder in the output folder.
 # sat_untarzip(file)
 
 }
+\seealso{
+\code{\link{satres}}
+}
 \concept{satellite previous functions}

@@ -19,6 +19,7 @@
 #' @return A vector of strings, name of the processed files.
 #'
 #' @family satellite previous functions
+#' @seealso \code{\link{satres}}
 #'
 #' @examples
 #'
