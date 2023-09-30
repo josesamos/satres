@@ -6,26 +6,43 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of satres is to …
+I teach a GIS course at the University of Granada (Spain). Each edition
+of the course the students and I download files with satellite bands
+from the [*ESA*](https://dataspace.copernicus.eu/) and
+[*USGS*](https://glovis.usgs.gov/) websites to perform data analysis,
+transform them or store them in DBMS.
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+They are downloaded as files in ZIP or TAR format. In some cases, it is
+necessary to download several files that cover the study area, so the
+first operation to perform is to merge the bands.
+
+Currently we perform this operation using the
+[`terra`](https://CRAN.R-project.org/package=terra) package, but it is
+quite laborious because we have to decompress and access the different
+bands to apply the operations.
+
+The goal of `satres` is to partially automate these operations. We can
+use it to decompress all the downloaded files in a single operation. It
+is enough to indicate the folder that contains the decompressed files.
+Satellite bands are automatically obtained by name and spatial
+resolution. If we have several files to cover a geographical area, the
+corresponding bands are automatically merged. The result can be stored
+on disk and can also be obtained as objects of class `SpatRaster` of
+package `terra`.
+
+## Installation
+
+<!-- You can install the released version of `satres` from [CRAN](https://CRAN.R-project.org) with: -->
+<!-- ``` r -->
+<!-- install.packages("satres") -->
+<!-- ``` -->
+<!-- And the development version from [GitHub](https://github.com/) with: -->
+
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+devtools::install_github("josesamos/satres")
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub.
+## Example
