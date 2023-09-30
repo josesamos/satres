@@ -18,16 +18,16 @@
 #'
 #' @return A vector of strings, name of the processed files.
 #'
-#' @family previous functions
+#' @family satellite previous functions
 #'
 #' @examples
 #'
-#' # sat_untarzip("data/usgs")
+#' # sat_untarzip("dat/usgs")
 #'
-#' # sat_untarzip("data/esa")
+#' # sat_untarzip("dat/esa")
 #'
-#' # file <- c("data/usgs/LC08_L1TP_200034_20230924_20230924_02_RT.tar",
-#' #           "data/esa/S2A_MSIL2A_20230905T105621_N0509_R094_T30SVF_20230905T170700.zip")
+#' # file <- c("dat/usgs/LC08_L1TP_200034_20230924_20230924_02_RT.tar",
+#' #           "dat/esa/S2A_MSIL2A_20230905T105621_N0509_R094_T30SVF_20230905T170700.zip")
 #' # sat_untarzip(file)
 #'
 #' @export
@@ -97,7 +97,7 @@ sat_untarzip <- function(file, out_dir = NULL, include_filename = NULL, only_sho
 #' Given a name, if it ends in "/" the nexus is the empty string, otherwise it
 #' is "/".
 #'
-#' @param df A string.
+#' @param name A string.
 #'
 #' @return A string.
 #'

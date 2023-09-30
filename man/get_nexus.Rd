@@ -7,7 +7,7 @@
 get_nexus(name)
 }
 \arguments{
-\item{df}{A string.}
+\item{name}{A string.}
 }
 \value{
 A string.
