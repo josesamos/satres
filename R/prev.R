@@ -13,25 +13,35 @@
 #' @param file A string or string vector.
 #' @param out_dir A string or string vector, output folder.
 #' @param include_filename A boolean, include file name as a folder in the output.
+#' @param only_show_files A boolean, only show the files that would be unzipped,
+#' not unzip them.
 #'
-#' @return A boolean.
+#' @return A vector of strings, name of the processed files.
 #'
 #' @family previous functions
 #'
 #' @examples
 #'
-#' # untarzip("data/usgs")
+#' # sat_untarzip("data/usgs")
 #'
-#' file <- c("data/usgs/LC08_L1TP_200034_20230924_20230924_02_RT.tar",
-#'           "data/esa/S2A_MSIL2A_20230905T105621_N0509_R094_T30SVF_20230905T170700.zip")
-#' # untarzip(file)
+#' # sat_untarzip("data/esa")
+#'
+#' # file <- c("data/usgs/LC08_L1TP_200034_20230924_20230924_02_RT.tar",
+#' #           "data/esa/S2A_MSIL2A_20230905T105621_N0509_R094_T30SVF_20230905T170700.zip")
+#' # sat_untarzip(file)
 #'
 #' @export
-untarzip <- function(file, out_dir = NULL, include_filename = TRUE) {
-  if (length(file) == 1 & dir.exists(file)) {
-    lf <- list.files(path = file, pattern = "*.tar|*.zip", ignore.case = TRUE)
-    nexus <- get_nexus(file)
-    file <- paste0(file, nexus, lf)
+sat_untarzip <- function(file, out_dir = NULL, include_filename = NULL, only_show_files = FALSE) {
+  if (length(file) == 1) {
+    if (dir.exists(file)) {
+      file <-
+        list.files(
+          path = file,
+          pattern = "*.tar|*.zip",
+          ignore.case = TRUE,
+          full.names = TRUE
+        )
+    }
   }
   file_name <- basename(file)
   path_name <- dirname(file)
@@ -47,22 +57,38 @@ untarzip <- function(file, out_dir = NULL, include_filename = TRUE) {
       out_dir[i] <- out_dir[l]
     }
   }
-  if (include_filename) {
-    name <- substr(file_name, 1, n - 4)
-  } else {
-    name <- ""
+  name <- rep("", length(file))
+  if (!is.null(include_filename)) {
+    if (include_filename) {
+      name <- substr(file_name, 1, n - 4)
+    }
   }
+  res <- NULL
   for (i in 1:length(extension)) {
     nexus <- get_nexus(out_dir[i])
     if (extension[i] == ".tar" | extension[i] == ".TAR") {
-      utils::untar(file[i], exdir = paste0(out_dir[i], nexus, name[i]))
+      if (is.null(include_filename)) {
+        name[i] <- substr(file_name[i], 1, n[i] - 4)
+      }
+      exdir <- paste0(out_dir[i], nexus, name[i])
+      if (!only_show_files) {
+        utils::untar(file[i], exdir = exdir)
+      }
     } else if (extension[i] == ".zip" | extension[i] == ".ZIP") {
-      utils::unzip(file[i], exdir = paste0(out_dir[i], nexus, name[i]))
+      exdir <- paste0(out_dir[i], nexus, name[i])
+      if (!only_show_files) {
+        utils::unzip(file[i], exdir = exdir)
+      }
     } else {
       stop(sprintf("Unsupported file type: %s", extension[i]))
     }
+    if (!only_show_files) {
+      res <- c(res, file[i])
+    } else {
+      res <- c(res, sprintf("%s to %s", file[i], exdir))
+    }
   }
-  TRUE
+  res
 }
 
 

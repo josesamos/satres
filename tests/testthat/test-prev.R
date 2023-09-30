@@ -1,3 +1,53 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+test_that("sat_untarzip()", {
+  expect_equal({
+    file <- c("a/b/f.tar",
+              "c/d/g.zip")
+    sat_untarzip(file, only_show_files = TRUE)
+  },
+  c("a/b/f.tar to a/b/f", "c/d/g.zip to c/d/"))
+})
+
+test_that("sat_untarzip()", {
+  expect_equal({
+    file <- c("a/b/f.tar",
+              "c/d/g.zip")
+    sat_untarzip(file, out_dir = 'e', only_show_files = TRUE)
+  },
+  c("a/b/f.tar to e/f", "c/d/g.zip to e/"))
+})
+
+test_that("sat_untarzip()", {
+  expect_equal({
+    file <- c("a/b/f.tar",
+              "c/d/g.zip")
+    sat_untarzip(file, include_filename = TRUE, only_show_files = TRUE)
+  },
+  c("a/b/f.tar to a/b/f", "c/d/g.zip to c/d/g"))
+})
+
+test_that("sat_untarzip()", {
+  expect_equal({
+    file <- c("a/b/f.tar",
+              "c/d/g.zip")
+    sat_untarzip(file, out_dir = 'e', include_filename = TRUE, only_show_files = TRUE)
+  },
+  c("a/b/f.tar to e/f", "c/d/g.zip to e/g"))
+})
+
+test_that("sat_untarzip()", {
+  expect_equal({
+    file <- c("a/b/f.tar",
+              "c/d/g.zip")
+    sat_untarzip(file, include_filename = FALSE, only_show_files = TRUE)
+  },
+  c("a/b/f.tar to a/b/", "c/d/g.zip to c/d/"))
+})
+
+test_that("sat_untarzip()", {
+  expect_equal({
+    file <- c("a/b/f.tar",
+              "c/d/g.zip")
+    sat_untarzip(file, out_dir = 'e', include_filename = FALSE, only_show_files = TRUE)
+  },
+  c("a/b/f.tar to e/", "c/d/g.zip to e/"))
 })
