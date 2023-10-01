@@ -5,17 +5,20 @@
 \alias{save_by_resolution.satres}
 \title{Save multi-band rasters according to their spatial resolution}
 \usage{
-save_by_resolution(sr, out_dir)
+save_by_resolution(sr, out_dir, only_show_files)
 
-\method{save_by_resolution}{satres}(sr, out_dir = NULL)
+\method{save_by_resolution}{satres}(sr, out_dir = NULL, only_show_files = FALSE)
 }
 \arguments{
 \item{sr}{A \code{satres} object.}
 
 \item{out_dir}{A string, output folder.}
+
+\item{only_show_files}{A boolean, only show the files that would be created,
+not create them.}
 }
 \value{
-A \code{satres} object.
+A vector of strings, name of the saved files.
 }
 \description{
 Saves multi-band raster files of the object according to its spatial
@@ -26,8 +29,16 @@ They are stored in the folder that is indicated or, if none is indicated, in
 the folder that was used to create the object.
 }
 \examples{
-# sr <- sr |>
-#       save_by_resolution()
+
+esa <- system.file("extdata", "esa", package = "satres")
+sr <- satres(dir = esa,
+             out_dir = tempdir())
+
+# f <- sr |>
+#      save_by_resolution()
+
+f <- sr |>
+     save_by_resolution(only_show_files = TRUE)
 
 }
 \seealso{
@@ -35,7 +46,7 @@ the folder that was used to create the object.
 
 Other satellite functions: 
 \code{\link{as_SpatRaster}()},
-\code{\link{get_spatial_resolutions}()},
+\code{\link{get_spatial_resolution}()},
 \code{\link{satres}()}
 }
 \concept{satellite functions}

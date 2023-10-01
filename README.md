@@ -57,17 +57,16 @@ factor of 100, to reduce their size so they can be included in the
 package. The result is the following folders:
 
 - `esa/f`: 751 KB
-- `esa/f`: 842 KB
+- `esa/g`: 842 KB
 
-To join the satellite bands corresponding to the same geographical area
-and classify them according to their spatial resolution, we only have to
-create an object of the `satres` class. We pass as a parameter the
-folder where the files are located and a working folder where the
-virtual rasters will be created.
+To merge the satellite bands corresponding to the same geographical area
+(tiles) and classify them according to their spatial resolution, we only
+have to create an object of the `satres` class. We pass as a parameter
+the folder where the files are located.
 
 ``` r
 esa <- system.file("extdata", "esa", package = "satres")
-sr <- satres(dir = esa, out_dir = tempdir())
+sr <- satres(dir = esa)
 ```
 
 Next we consult the spatial resolution of the result (remember that we
@@ -75,19 +74,19 @@ have changed the resolution, adding it by a factor of 100).
 
 ``` r
 sr |>
-  get_spatial_resolutions()
+  get_spatial_resolution()
 #> [1] "r1000m" "r2000m" "r6000m"
 ```
 
 We obtain an object of class `SpatRaster` from the `terra` package with
-all the bands of that spatial resolution.
+all the bands of the indicated spatial resolution.
 
 ``` r
 b <- sr |>
   as_SpatRaster("r1000m")
 ```
 
-To see the available bands, we represent them graphically below.
+To show the available bands, we represent them graphically below.
 
 ``` r
 terra::plot(b)

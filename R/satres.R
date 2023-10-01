@@ -13,8 +13,8 @@
 #' raster files, creates an object containing all rasters grouped according to
 #' their spatial resolution.
 #'
-#' If there are several rasters of the same area, it previously merges them to
-#' form a single raster of the total area.
+#' If there are several rasters of the same area (tiles), it previously merges
+#' them to form a single raster of the total area.
 #'
 #' A working folder where the virtual rasters are created is indicated as a
 #' parameter. Additionally, we indicate whether we wish to process only the
@@ -31,12 +31,14 @@
 #'
 #' @examples
 #'
-#' # s <- satres("dat/usgs")
+#' esa <- system.file("extdata", "esa", package = "satres")
 #'
-#' # s <- satres("dat/esa")
+#' sr <- satres(dir = esa,
+#'              out_dir = tempdir())
 #'
-#' # dir <- c("dat/usgs", "dat/esa")
-#' # s <- satres(dir)
+#' sr <- satres(dir = esa,
+#'              out_dir = tempdir(),
+#'              only_bands = FALSE)
 #'
 #' @export
 satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
@@ -52,7 +54,7 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
     files <- c(files, lf)
   }
   if (is.null(out_dir)) {
-    out_dir <- dir[1]
+    out_dir <- tempdir()
   }
   file_name <- basename(files)
   n <- nchar(file_name)
@@ -112,37 +114,47 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
 #'
 #' @param sr A `satres` object.
 #' @param out_dir A string, output folder.
+#' @param only_show_files A boolean, only show the files that would be created,
+#' not create them.
 #'
-#' @return A `satres` object.
+#' @return A vector of strings, name of the saved files.
 #'
 #' @family satellite functions
 #' @seealso \code{\link{sat_untarzip}}
 #'
 #' @examples
-#' # sr <- sr |>
-#' #       save_by_resolution()
+#'
+#' esa <- system.file("extdata", "esa", package = "satres")
+#' sr <- satres(dir = esa,
+#'              out_dir = tempdir())
+#'
+#' # f <- sr |>
+#' #      save_by_resolution()
+#'
+#' f <- sr |>
+#'      save_by_resolution(only_show_files = TRUE)
 #'
 #' @export
-save_by_resolution <- function(sr, out_dir)
+save_by_resolution <- function(sr, out_dir, only_show_files)
   UseMethod("save_by_resolution")
 
 
 #' @rdname save_by_resolution
 #' @export
-save_by_resolution.satres <- function(sr, out_dir = NULL) {
+save_by_resolution.satres <- function(sr, out_dir = NULL, only_show_files = FALSE) {
   if (is.null(out_dir)) {
     out_dir <- sr$out_dir
   }
   nexus <- get_nexus(out_dir)
+  res <- NULL
   for (n in names(sr$bands)) {
-    terra::writeRaster(
-      sr$bands[[n]],
-      paste0(out_dir, nexus, n, ".tif"),
-      filetype = "GTiff",
-      overwrite = TRUE
-    )
+    file <- paste0(out_dir, nexus, n, ".tif")
+    res <- c(res, file)
+    if (!only_show_files) {
+      terra::writeRaster(sr$bands[[n]], file, filetype = "GTiff", overwrite = TRUE)
+    }
   }
-  sr
+  res
 }
 
 
@@ -158,17 +170,22 @@ save_by_resolution.satres <- function(sr, out_dir = NULL) {
 #' @seealso \code{\link{sat_untarzip}}
 #'
 #' @examples
-#' # res <- sr |>
-#' #        get_spatial_resolutions()
+#'
+#' esa <- system.file("extdata", "esa", package = "satres")
+#' sr <- satres(dir = esa,
+#'              out_dir = tempdir())
+#'
+#' r <- sr |>
+#'      get_spatial_resolution()
 #'
 #' @export
-get_spatial_resolutions <- function(sr)
-  UseMethod("get_spatial_resolutions")
+get_spatial_resolution <- function(sr)
+  UseMethod("get_spatial_resolution")
 
 
-#' @rdname get_spatial_resolutions
+#' @rdname get_spatial_resolution
 #' @export
-get_spatial_resolutions.satres <- function(sr) {
+get_spatial_resolution.satres <- function(sr) {
   names(sr$bands)
 }
 
@@ -187,8 +204,13 @@ get_spatial_resolutions.satres <- function(sr) {
 #' @seealso \code{\link{sat_untarzip}}
 #'
 #' @examples
-#' # tsr <- sr |>
-#' #        as_SpatRaster("r10m")
+#'
+#' esa <- system.file("extdata", "esa", package = "satres")
+#' sr <- satres(dir = esa,
+#'              out_dir = tempdir())
+#'
+#' r <- sr |>
+#'      as_SpatRaster("r1000m")
 #'
 #' @export
 as_SpatRaster <- function(sr, res)

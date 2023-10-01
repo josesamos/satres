@@ -24,8 +24,8 @@ Given a folder name or a vector of folder names, containing satellite band
 raster files, creates an object containing all rasters grouped according to
 their spatial resolution.
 
-If there are several rasters of the same area, it previously merges them to
-form a single raster of the total area.
+If there are several rasters of the same area (tiles), it previously merges
+them to form a single raster of the total area.
 
 A working folder where the virtual rasters are created is indicated as a
 parameter. Additionally, we indicate whether we wish to process only the
@@ -33,12 +33,14 @@ bands (B1 to B12) or all available files.
 }
 \examples{
 
-# s <- satres("dat/usgs")
+esa <- system.file("extdata", "esa", package = "satres")
 
-# s <- satres("dat/esa")
+sr <- satres(dir = esa,
+             out_dir = tempdir())
 
-# dir <- c("dat/usgs", "dat/esa")
-# s <- satres(dir)
+sr <- satres(dir = esa,
+             out_dir = tempdir(),
+             only_bands = FALSE)
 
 }
 \seealso{
@@ -46,7 +48,7 @@ bands (B1 to B12) or all available files.
 
 Other satellite functions: 
 \code{\link{as_SpatRaster}()},
-\code{\link{get_spatial_resolutions}()},
+\code{\link{get_spatial_resolution}()},
 \code{\link{save_by_resolution}()}
 }
 \concept{satellite functions}

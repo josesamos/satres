@@ -22,15 +22,20 @@ Returns as an object of class \code{SpatRaster} from package \code{terra} the
 multi-band raster of the indicated spatial resolution.
 }
 \examples{
-# tsr <- sr |>
-#        as_SpatRaster("r10m")
+
+esa <- system.file("extdata", "esa", package = "satres")
+sr <- satres(dir = esa,
+             out_dir = tempdir())
+
+r <- sr |>
+     as_SpatRaster("r1000m")
 
 }
 \seealso{
 \code{\link{sat_untarzip}}
 
 Other satellite functions: 
-\code{\link{get_spatial_resolutions}()},
+\code{\link{get_spatial_resolution}()},
 \code{\link{satres}()},
 \code{\link{save_by_resolution}()}
 }
