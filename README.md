@@ -4,9 +4,8 @@
 # satres <a href="https://josesamos.github.io/satres/"><img src="man/figures/logo.png" align="right" height="139" alt="satres website" /></a>
 
 <!-- badges: start -->
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/satres)](https://CRAN.R-project.org/package=satres) -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/satres)](https://CRAN.R-project.org/package=satres)
 [![R-CMD-check](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -30,14 +29,16 @@ be obtained as objects of class `SpatRaster`, from package
 
 ## Installation
 
-<!-- You can install the released version of `satres` from [CRAN](https://CRAN.R-project.org) with: -->
-<!-- ``` r -->
-<!-- install.packages("satres") -->
-<!-- ``` -->
-<!-- And the development version from [GitHub](https://github.com/) with: -->
+You can install the released version of `satres` from
+[CRAN](https://CRAN.R-project.org) with:
 
-You can install the development version from
-[GitHub](https://github.com/) with:
+``` r
+install.packages("satres")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+<!-- You can install the development version from [GitHub](https://github.com/) with: -->
 
 ``` r
 devtools::install_github("josesamos/satres")

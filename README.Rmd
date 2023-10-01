@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/satres)](https://CRAN.R-project.org/package=satres)
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/satres)](https://CRAN.R-project.org/package=satres) -->
 [![R-CMD-check](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -28,15 +28,15 @@ The goal of `satres` (*sat*ellite spectral and spatial *res*olution) is to parti
 
 ## Installation
 
-<!-- You can install the released version of `satres` from [CRAN](https://CRAN.R-project.org) with: -->
+You can install the released version of `satres` from [CRAN](https://CRAN.R-project.org) with:
 
-<!-- ``` r -->
-<!-- install.packages("satres") -->
-<!-- ``` -->
+``` r
+install.packages("satres")
+```
 
-<!-- And the development version from [GitHub](https://github.com/) with: -->
+And the development version from [GitHub](https://github.com/) with:
 
-You can install the development version from [GitHub](https://github.com/) with:
+<!-- You can install the development version from [GitHub](https://github.com/) with: -->
 
 ``` r
 devtools::install_github("josesamos/satres")
