@@ -14,9 +14,12 @@ knitr::opts_chunk$set(
 ```
 
 
-# satres
+# satres <a href="https://josesamos.github.io/satres/"><img src="man/figures/logo.png" align="right" height="139" alt="satres website" /></a>
+
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/satres)](https://CRAN.R-project.org/package=satres)
+[![R-CMD-check](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 We frequently download files with satellite bands from the [*ESA*](https://dataspace.copernicus.eu/) and [*USGS*](https://glovis.usgs.gov/) websites to perform data analysis, transform them or store them in DBMS. They are downloaded as files in ZIP or TAR format. In some cases, it is necessary to download several files that cover the study area, so the first operation to perform is to merge the bands. To access the bands we have to explicitly indicate the name and location of their files.

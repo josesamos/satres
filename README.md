@@ -1,9 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# satres
+# satres <a href="https://josesamos.github.io/satres/"><img src="man/figures/logo.png" align="right" height="139" alt="satres website" /></a>
 
 <!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/satres)](https://CRAN.R-project.org/package=satres)
+[![R-CMD-check](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 We frequently download files with satellite bands from the
