@@ -15,13 +15,14 @@ files that cover the study area, so the first operation to perform is to
 merge the bands. To access the bands we have to explicitly indicate the
 name and location of their files.
 
-The goal of `satres` is to partially automate these operations. It is
-enough to indicate the folder that contains the decompressed files:
-Satellite bands are automatically obtained by name and spatial
-resolution; if we have several files to cover a geographical area, the
-corresponding bands are automatically merged. The result can be stored
-on disk and can also be obtained as objects of class `SpatRaster`, from
-package [`terra`](https://CRAN.R-project.org/package=terra).
+The goal of `satres` (*sat*ellite spectral and spatial *res*olution) is
+to partially automate these operations. It is enough to indicate the
+folder that contains the decompressed files: Satellite bands are
+automatically obtained by name (spectral) and spatial resolution; if we
+have several files to cover a geographical area, the corresponding bands
+are automatically merged. The result can be stored on disk and can also
+be obtained as objects of class `SpatRaster`, from package
+[`terra`](https://CRAN.R-project.org/package=terra).
 
 ## Installation
 
@@ -82,17 +83,17 @@ We obtain an object of class `SpatRaster` from the `terra` package with
 all the bands of that spatial resolution.
 
 ``` r
-r <- sr |>
+b <- sr |>
   as_SpatRaster("r1000m")
 ```
 
 To see the available bands, we represent them graphically below.
 
 ``` r
-terra::plot(r)
+terra::plot(b)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+<img src="man/figures/README-bands-1.png" width="100%" />
 
 The bands are directly accessible by name (*B02*, *B03*, *B04* and *B08*
 in the figure), within each object obtained in the result.

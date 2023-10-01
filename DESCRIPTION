@@ -1,14 +1,13 @@
 Package: satres
-Title: Obtaining satellite raster files according to their spatial
-    resolution
+Title: Grouping satellite bands by spectral and spatial resolution
 Version: 0.0.0.9000
 Authors@R: 
     person("Jose", "Samos", , "jsamos@ugr.es", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-4457-3439"))
 Description: Given raster files directly downloaded from ESA and USGS
     websites, it generates a raster structure where it merges them if they
-    are part of the same scene and classifies them according to their
-    spatial resolution.
+    are part of the same scene and classifies them according to their spectral
+    and spatial resolution for easy access by name.
 License: MIT + file LICENSE
 URL: https://josesamos.github.io/satres/,
     https://github.com/josesamos/satres
