@@ -45,7 +45,7 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
     lf <-
       list.files(
         path = d,
-        pattern = "*.TIF|.jp2",
+        pattern = "*.TIF|*.jp2|*.tif|*.JP2",
         recursive = TRUE,
         full.names = TRUE
       )

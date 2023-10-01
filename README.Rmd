@@ -16,14 +16,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-I teach a GIS course at the University of Granada (Spain). Each edition of the course the students and I download files with satellite bands from the [*ESA*](https://dataspace.copernicus.eu/) and [*USGS*](https://glovis.usgs.gov/) websites to perform data analysis, transform them or store them in DBMS.
+We frequently download files with satellite bands from the [*ESA*](https://dataspace.copernicus.eu/) and [*USGS*](https://glovis.usgs.gov/) websites to perform data analysis, transform them or store them in DBMS. They are downloaded as files in ZIP or TAR format. In some cases, it is necessary to download several files that cover the study area, so the first operation to perform is to merge the bands. To access the bands we have to explicitly indicate the name and location of their files.
 
-They are downloaded as files in ZIP or TAR format. In some cases, it is necessary to download several files that cover the study area, so the first operation to perform is to merge the bands.
-
-Currently we perform this operation using the [`terra`](https://CRAN.R-project.org/package=terra) package, but it is quite laborious because we have to decompress and access the different bands to apply the operations.
-
-The goal of `satres` is to partially automate these operations. We can use it to decompress all the downloaded files in a single operation. It is enough to indicate the folder that contains the decompressed files: Satellite bands are automatically obtained by name and spatial resolution; if we have several files to cover a geographical area, the corresponding bands are automatically merged. The result can be stored on disk and can also be obtained as objects of class `SpatRaster` of package `terra`.
-
+The goal of `satres` is to partially automate these operations. It is enough to indicate the folder that contains the decompressed files: Satellite bands are automatically obtained by name and spatial resolution; if we have several files to cover a geographical area, the corresponding bands are automatically merged. The result can be stored on disk and can also be obtained as objects of class `SpatRaster`, from package [`terra`](https://CRAN.R-project.org/package=terra).
 
 ## Installation
 
@@ -47,11 +42,41 @@ devtools::install_github("josesamos/satres")
 library(satres)
 ```
 
-To cover the area of the municipality of Lanjarón (Granada), I have downloaded two satellite band files from the *ESA* website.
+To cover the area of the municipality of Lanjarón in Granada (Spain), we have downloaded two satellite band files from the [*ESA*](https://dataspace.copernicus.eu/) website.
 
 - `S2A_MSIL2A_20230905T105621_N0509_R094_T30SVF_20230905T170700.zip`: 0.91 GB
 - `S2A_MSIL2A_20230905T105621_N0509_R094_T30SVG_20230905T170700.zip`: 1.14 GB 
 
-I have unzipped them directly into the `datos/esa` folder, creating two subfolders.
+We have unzipped them directly into a folder, creating two subfolders. Additionally, we have selected and transformed the original raster files, grouping them using the `terra::aggregate()` function with a factor of 100, to reduce their size so they can be included in the package. The result is the following folders:
 
+- `esa/f`: 751 KB
+- `esa/f`: 842 KB
 
+To join the satellite bands corresponding to the same geographical area and classify them according to their spatial resolution, we only have to create an object of the `satres` class. We pass as a parameter the folder where the files are located and a working folder where the virtual rasters will be created.
+
+```{r}
+esa <- system.file("extdata", "esa", package = "satres")
+sr <- satres(dir = esa, out_dir = tempdir())
+```
+
+Next we consult the spatial resolution of the result (remember that we have changed the resolution, adding it by a factor of 100).
+
+```{r}
+sr |>
+  get_spatial_resolutions()
+```
+
+We obtain an object of class `SpatRaster` from the `terra` package with all the bands of that spatial resolution.
+
+```{r}
+r <- sr |>
+  as_SpatRaster("r1000m")
+```
+
+To see the available bands, we represent them graphically below.
+
+```{r}
+terra::plot(r)
+```
+
+The bands are directly accessible by name (*B02*, *B03*, *B04* and *B08* in the figure), within each object obtained in the result.
