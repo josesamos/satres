@@ -28,6 +28,9 @@
     <loc>https://josesamos.github.io/satres/reference/as_SpatRaster.html</loc>
   </url>
   <url>
+    <loc>https://josesamos.github.io/satres/reference/find_name_to_files.html</loc>
+  </url>
+  <url>
     <loc>https://josesamos.github.io/satres/reference/get_nexus.html</loc>
   </url>
   <url>
@@ -44,6 +47,9 @@
   </url>
   <url>
     <loc>https://josesamos.github.io/satres/reference/sat_rest.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/sat_rest_msk.html</loc>
   </url>
   <url>
     <loc>https://josesamos.github.io/satres/reference/sat_untarzip.html</loc>
