@@ -27,6 +27,22 @@ are automatically merged. The result can be stored on disk and can also
 be obtained as objects of class `SpatRaster`, from package
 [`terra`](https://CRAN.R-project.org/package=terra).
 
+Currently supports files obtained from the following sources and
+characteristics:
+
+- *Landsat 8-9 OLI/TIRS C2 L1* (Landsat 8-9 Operational Land Imager and
+  Thermal Infrared Sensor Collection 2 Level-1).
+
+- *Landsat 7 ETM+ C2 L1* (Landsat 7 Enhanced Thematic Mapper Plus
+  Collection 2 Level-1).
+
+- *Landsat 4-5 TM C2 L1* (Landsat 4-5 Thematic Mapper Collection 2
+  Level-1).
+
+- *Sentinel-2 MSI S2MSI1C* (Sentinel-2 Level-1C).
+
+- *Sentinel-2 MSI S2MSI2A* (Sentinel-2 Level-2A).
+
 ## Installation
 
 You can install the released version of `satres` from

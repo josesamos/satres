@@ -4,15 +4,13 @@
 \alias{select_band_files}
 \title{Select band files}
 \usage{
-select_band_files(files, bands)
+select_band_files(files)
 }
 \arguments{
 \item{files}{A string vector.}
-
-\item{bands}{A string vector.}
 }
 \value{
-A string vector.
+A list of string vectors.
 }
 \description{
 Select the files that correspond to the band selection. Each one is assigned

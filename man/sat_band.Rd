@@ -11,12 +11,11 @@ A vector.
 sat_band
 }
 \description{
-Additionally, the name of each element is the band identifier. There will be
-repeated names (bands with the same identifier) due to having different
-spatial resolution.
+The name of each element is the band identifier.
 }
 \seealso{
 Other satellite data: 
+\code{\link{sat_rest_msk}},
 \code{\link{sat_rest}}
 }
 \concept{satellite data}

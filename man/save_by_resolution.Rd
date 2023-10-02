@@ -31,12 +31,7 @@ the folder that was used to create the object.
 \examples{
 
 esa <- system.file("extdata", "esa", package = "satres")
-sr <- satres(dir = esa,
-             out_dir = tempdir())
-
-# f <- sr |>
-#      save_by_resolution()
-
+sr <- satres(dir = esa)
 f <- sr |>
      save_by_resolution(only_show_files = TRUE)
 

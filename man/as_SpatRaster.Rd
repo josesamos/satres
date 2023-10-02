@@ -18,8 +18,8 @@ as_SpatRaster(sr, res)
 A vector of strings.
 }
 \description{
-Returns as an object of class \code{SpatRaster} from package \code{terra} the
-multi-band raster of the indicated spatial resolution.
+Returns the multi-band raster of the indicated spatial resolution as an object
+of class \code{SpatRaster} from package \code{terra}
 }
 \examples{
 

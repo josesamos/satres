@@ -1,8 +1,6 @@
 #' Final part of the name and extension of the satellite band files
 #'
-#' Additionally, the name of each element is the band identifier. There will be
-#' repeated names (bands with the same identifier) due to having different
-#' spatial resolution.
+#' The name of each element is the band identifier.
 #'
 #' @family satellite data
 #'
@@ -12,13 +10,22 @@
 
 #' Final part of the name and extension of satellite rasters that are not bands
 #'
-#' Additionally, the name of each element is the raster identifier. There will be
-#' repeated names (rasters with the same identifier) due to having different
-#' spatial resolution.
+#' The name of each element is the raster identifier.
 #'
 #' @family satellite data
 #'
 #' @format A vector.
 #'
 "sat_rest"
+
+
+#' Mask of name of satellite rasters that are not bands
+#'
+#' Raster name patterns to treat and not consider bands.
+#'
+#' @family satellite data
+#'
+#' @format A vector.
+#'
+"sat_rest_msk"
 

@@ -27,7 +27,7 @@ their spatial resolution.
 If there are several rasters of the same area (tiles), it previously merges
 them to form a single raster of the total area.
 
-A working folder where the virtual rasters are created is indicated as a
+A working folder where the virtual rasters are created can be indicated as a
 parameter. Additionally, we indicate whether we wish to process only the
 bands (B1 to B12) or all available files.
 }

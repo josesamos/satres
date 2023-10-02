@@ -14,7 +14,7 @@
 #' @param out_dir A string or string vector, output folder.
 #' @param include_filename A boolean, include file name as a folder in the output.
 #' @param only_show_files A boolean, only show the files that would be unzipped,
-#' not unzip them.
+#' and the destination folders, not unzip them.
 #'
 #' @return A vector of strings, name of the processed files.
 #'
@@ -23,13 +23,12 @@
 #'
 #' @examples
 #'
-#' # sat_untarzip("dat/usgs")
+#' f <- system.file("extdata", package = "satres")
+#' r <- sat_untarzip(f, only_show_files = TRUE)
 #'
-#' # sat_untarzip("dat/esa")
-#'
-#' # file <- c("dat/usgs/LC08_L1TP_200034_20230924_20230924_02_RT.tar",
-#' #           "dat/esa/S2A_MSIL2A_20230905T105621_N0509_R094_T30SVF_20230905T170700.zip")
-#' # sat_untarzip(file)
+#' f1 <- system.file("extdata", "satres.zip", package = "satres")
+#' f2 <- system.file("extdata", "satres.tar", package = "satres")
+#' r <- sat_untarzip(c(f1, f2), only_show_files = TRUE)
 #'
 #' @export
 sat_untarzip <- function(file, out_dir = NULL, include_filename = NULL, only_show_files = FALSE) {

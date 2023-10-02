@@ -1,8 +1,11 @@
 .onLoad <- function(libname, pkgname) {
-  utils::data("sat_rest",
-       "sat_band",
-       package = pkgname,
-       envir = parent.env(environment()))
+  utils::data(
+    "sat_rest",
+    "sat_band",
+    "sat_rest_msk",
+    package = pkgname,
+    envir = parent.env(environment())
+  )
 }
 
 #' `satres` S3 class
@@ -16,7 +19,7 @@
 #' If there are several rasters of the same area (tiles), it previously merges
 #' them to form a single raster of the total area.
 #'
-#' A working folder where the virtual rasters are created is indicated as a
+#' A working folder where the virtual rasters are created can be indicated as a
 #' parameter. Additionally, we indicate whether we wish to process only the
 #' bands (B1 to B12) or all available files.
 #'
@@ -47,9 +50,10 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
     lf <-
       list.files(
         path = d,
-        pattern = "*.TIF|*.jp2|*.tif|*.JP2",
+        pattern = "*.TIF|*.jp2",
         recursive = TRUE,
-        full.names = TRUE
+        full.names = TRUE,
+        ignore.case = TRUE
       )
     files <- c(files, lf)
   }
@@ -58,12 +62,13 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
   }
   file_name <- basename(files)
   n <- nchar(file_name)
-  extension <- substr(file_name, n - 3, n)
-  bands <- sat_band
-  if (!only_bands) {
-    bands <- c(bands, sat_rest)
+  b_r <- select_band_files(files)
+
+  if (only_bands) {
+    files <- b_r[['band']]
+  } else {
+    files <- c(b_r[['band']], b_r[['rest']])
   }
-  files <- select_band_files(files, bands)
 
   names <- sort(unique(names(files)))
   b <- vector("list", length = length(names))
@@ -76,6 +81,7 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
     f <- paste0(out_dir, nexus, n, ".vrt")
     vf <- c(vf, f)
     t <- terra::vrt(files[names(files) == n], f, overwrite = TRUE)
+    # only tiles of the same raster
     if (terra::nlyr(t) == 1) {
       b[[n]] <- t
       names_1layer <- c(names_1layer, n)
@@ -125,12 +131,7 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa,
-#'              out_dir = tempdir())
-#'
-#' # f <- sr |>
-#' #      save_by_resolution()
-#'
+#' sr <- satres(dir = esa)
 #' f <- sr |>
 #'      save_by_resolution(only_show_files = TRUE)
 #'
@@ -192,8 +193,8 @@ get_spatial_resolution.satres <- function(sr) {
 
 #' As `terra` `SpatRaster` class
 #'
-#' Returns as an object of class `SpatRaster` from package `terra` the
-#' multi-band raster of the indicated spatial resolution.
+#' Returns the multi-band raster of the indicated spatial resolution as an object
+#' of class `SpatRaster` from package `terra`
 #'
 #' @param sr A `satres` object.
 #' @param res A string, spatial resolution.
@@ -258,23 +259,48 @@ transform_to_multiband <- function(bands) {
 #' the band identifier as a name.
 #'
 #' @param files A string vector.
-#' @param bands A string vector.
+#'
+#' @return A list of string vectors.
+#'
+#' @keywords internal
+select_band_files <- function(files) {
+  names(files) <- NA
+  sel <- rep(FALSE, length(files))
+  for (i in 1:length(sat_rest_msk)) {
+    r <- grepl(sat_rest_msk[i], files, fixed = TRUE)
+    if (sum(r) > 0) {
+      sel <- sel | r
+    }
+  }
+  band <- files[!sel]
+  rest <- files[sel]
+  band <- find_name_to_files(band, sat_band)
+  rest <- find_name_to_files(rest, sat_rest)
+  l <- list(band, rest)
+  names(l) <- c('band', 'rest')
+  l
+}
+
+
+#' find name to files
+#'
+#' Finds the name associated to a file name in a vector of named patterns.
+#'
+#' @param files A string vector.
+#' @param patterns A string vector of values with names.
 #'
 #' @return A string vector.
 #'
 #' @keywords internal
-select_band_files <- function(files, bands) {
-  names(files) <- NA
+find_name_to_files <- function(files, patterns) {
+  names <- names(patterns)
   fn <- names(files)
-  bn <- names(bands)
-  sel <- rep(FALSE, length(files))
-  for (i in 1:length(bands)) {
-    r <- grepl(bands[i], files, fixed = TRUE)
+  for (i in 1:length(patterns)) {
+    r <- grepl(patterns[i], files, fixed = TRUE)
     if (sum(r) > 0) {
-      sel <- sel | r
-      fn[which(r)] <- bn[i]
+      fn[which(r)] <- names[i]
     }
   }
   names(files) <- fn
-  files[sel]
+  files
 }
