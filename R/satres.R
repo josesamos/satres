@@ -23,11 +23,11 @@
 #' parameter. Additionally, we indicate whether we wish to process only the
 #' bands (B1 to B12) or all available files.
 #'
-#' @param dir A string or string vector.
+#' @param dir A string or string vector, folder names.
 #' @param out_dir A string, output folder.
 #' @param only_bands A boolean, include only satellite bands.
 #'
-#' @return A vector of strings, name of the processed files.
+#' @return A `satres` object.
 #'
 #' @family satellite functions
 #' @seealso \code{\link{sat_untarzip}}
@@ -60,10 +60,7 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
   if (is.null(out_dir)) {
     out_dir <- tempdir()
   }
-  file_name <- basename(files)
-  n <- nchar(file_name)
   b_r <- select_band_files(files)
-
   if (only_bands) {
     files <- b_r[['band']]
   } else {
@@ -282,7 +279,7 @@ select_band_files <- function(files) {
 }
 
 
-#' find name to files
+#' Find name to files
 #'
 #' Finds the name associated to a file name in a vector of named patterns.
 #'

@@ -7,14 +7,14 @@
 satres(dir, out_dir = NULL, only_bands = TRUE)
 }
 \arguments{
-\item{dir}{A string or string vector.}
+\item{dir}{A string or string vector, folder names.}
 
 \item{out_dir}{A string, output folder.}
 
 \item{only_bands}{A boolean, include only satellite bands.}
 }
 \value{
-A vector of strings, name of the processed files.
+A \code{satres} object.
 }
 \description{
 Creates a \code{satres} object from a set of raster files.

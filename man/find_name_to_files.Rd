@@ -2,7 +2,7 @@
 % Please edit documentation in R/satres.R
 \name{find_name_to_files}
 \alias{find_name_to_files}
-\title{find name to files}
+\title{Find name to files}
 \usage{
 find_name_to_files(files, patterns)
 }

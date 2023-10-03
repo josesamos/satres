@@ -17,8 +17,10 @@ sat_aggregate <- function(dir, out_dir, factor = 100) {
       path = dir,
       pattern = "*.TIF|.jp2",
       recursive = TRUE,
-      full.names = TRUE
+      full.names = TRUE,
+      ignore.case = TRUE
     )
+  nexus <- get_nexus(out_dir)
   for (f in lf) {
     file_name <- basename(f)
     n <- nchar(file_name)
@@ -26,7 +28,7 @@ sat_aggregate <- function(dir, out_dir, factor = 100) {
     r1 <- terra::rast(f)
     r2 <- terra::aggregate(r1, fact = factor)
     terra::writeRaster(r2,
-                       paste0(out_dir, file_name, '.TIF'),
+                       paste0(out_dir, nexus, file_name, '.TIF'),
                        filetype = "GTiff",
                        overwrite = TRUE)
   }

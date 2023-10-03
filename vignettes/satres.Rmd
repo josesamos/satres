@@ -48,7 +48,7 @@ sat_untarzip("download/esa", out_dir = "esa")
 
 We have unzipped them directly into a folder (`esa` folder), creating two subfolders. 
 
-In order to to reduce their size so they can be included in the package, we have additionally selected and transformed the original raster files, grouping them using the `terra::aggregate()` function with a factor of 100. The result is the following folders:
+In order to reduce their size so they can be included in the package, we have additionally selected and transformed the original raster files, grouping them using the `terra::aggregate()` function with a factor of 100. The result is the following folders:
 
 - `esa/f`: 751 KB
 - `esa/g`: 842 KB
