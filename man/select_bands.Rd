@@ -24,9 +24,6 @@ Select the bands of an object based on spatial resolution and band name.
 }
 \examples{
 
-file <- system.file("extdata", "lanjaron.gpkg", package = "satres")
-lanjaron <- sf::st_read(file, layer = "lanjaron_bbox", quiet = TRUE)
-
 esa <- system.file("extdata", "esa", package = "satres")
 sr <- satres(dir = esa) |>
      select_bands(res = c("r2000m", "r6000m"), bands = c("B02", "B03", "B04"))

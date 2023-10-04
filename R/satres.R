@@ -25,7 +25,7 @@
 #'
 #' @param dir A string or string vector, folder names.
 #' @param out_dir A string, output folder.
-#' @param only_spectral_bands_bands A boolean, include only spectral bands.
+#' @param only_spectral_bands A boolean, include only spectral bands.
 #'
 #' @return A `satres` object.
 #'

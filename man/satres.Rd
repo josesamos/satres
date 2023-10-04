@@ -11,7 +11,7 @@ satres(dir, out_dir = NULL, only_spectral_bands = TRUE)
 
 \item{out_dir}{A string, output folder.}
 
-\item{only_spectral_bands_bands}{A boolean, include only spectral bands.}
+\item{only_spectral_bands}{A boolean, include only spectral bands.}
 }
 \value{
 A \code{satres} object.

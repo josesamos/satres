@@ -59,9 +59,6 @@ clip_bands.satres <- function(sr, polygon) {
 #'
 #' @examples
 #'
-#' file <- system.file("extdata", "lanjaron.gpkg", package = "satres")
-#' lanjaron <- sf::st_read(file, layer = "lanjaron_bbox", quiet = TRUE)
-#'
 #' esa <- system.file("extdata", "esa", package = "satres")
 #' sr <- satres(dir = esa) |>
 #'      select_bands(res = c("r2000m", "r6000m"), bands = c("B02", "B03", "B04"))
@@ -75,7 +72,7 @@ select_bands <- function(sr, res, bands)
 select_bands.satres <- function(sr, res = NULL, bands = NULL) {
   if (!(is.null(res) & is.null(bands))) {
     res <- check_spatial_resolution(sr, res)
-    bands <- check_bands(res, bands)
+    bands <- check_bands(sr, res, bands)
     for (r in names(sr$bands)) {
       if (!(r %in% res)) {
         sr$bands[[r]] <- NULL
