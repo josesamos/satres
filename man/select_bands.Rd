@@ -3,7 +3,7 @@
 \name{select_bands}
 \alias{select_bands}
 \alias{select_bands.satres}
-\title{Select bands}
+\title{Select bands by spatial resolution and name}
 \usage{
 select_bands(sr, res, bands)
 
@@ -33,6 +33,7 @@ sr <- satres(dir = esa) |>
 \code{\link{satres}}
 
 Other satellite transformation: 
-\code{\link{clip_bands}()}
+\code{\link{clip_bands}()},
+\code{\link{merge_tiles}()}
 }
 \concept{satellite transformation}

@@ -44,7 +44,7 @@ clip_bands.satres <- function(sr, polygon) {
 }
 
 
-#' Select bands
+#' Select bands by spatial resolution and name
 #'
 #' Select the bands of an object based on spatial resolution and band name.
 #'
@@ -84,5 +84,39 @@ select_bands.satres <- function(sr, res = NULL, bands = NULL) {
     }
   }
   sr
+}
+
+
+#' Merge objects that are tiles
+#'
+#' Merge objects whose bands are tiles of a mosaic.
+#'
+#' The objects must have the same CRS, spatial resolution and bands.
+#'
+#' @param sr A `satres` object.
+#' @param ... `satres` objects.
+#'
+#' @return A `satres` object.
+#'
+#' @family satellite transformation
+#' @seealso \code{\link{satres}}
+#'
+#' @examples
+#'
+#' esa_f <- system.file("extdata", "esa/f", package = "satres")
+#' esa_g <- system.file("extdata", "esa/g", package = "satres")
+#' sr2 <- satres(dir = esa_f)
+#' sr <- satres(dir = esa_g) |>
+#'   merge_tiles(sr2)
+#'
+#' @export
+merge_tiles <- function(sr, ...)
+  UseMethod("merge_tiles")
+
+#' @rdname merge_tiles
+#' @export
+merge_tiles.satres <- function(sr, ...) {
+  x <- list(...)
+  x[[1]]
 }
 

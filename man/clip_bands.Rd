@@ -38,6 +38,7 @@ sr <- satres(dir = esa) |>
 \code{\link{satres}}
 
 Other satellite transformation: 
+\code{\link{merge_tiles}()},
 \code{\link{select_bands}()}
 }
 \concept{satellite transformation}
