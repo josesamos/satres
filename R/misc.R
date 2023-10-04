@@ -48,7 +48,7 @@ sat_aggregate <- function(dir, out_dir, factor = 100) {
 sat_dimensions <- function(sr) {
   res <- NULL
   for (n in names(sr$bands)) {
-    res <- c(res,
+    res <- c(res, n,
              terra::ncol(sr$bands[[n]]),
              terra::nrow(sr$bands[[n]]),
              terra::nlyr(sr$bands[[n]]))
