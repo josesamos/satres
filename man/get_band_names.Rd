@@ -18,16 +18,16 @@ get_band_names(sr, res)
 A vector of strings.
 }
 \description{
-Returns the band names of the multi-band raster that make up the object.
+Returns all names of the multi-band raster that make up the object.
 }
 \details{
-We can indicate the name of a certain spatial resolution to obtain only its
-band names.
+We can indicate the name of a certain spatial resolution to obtain only
+its names.
 }
 \examples{
 
 esa <- system.file("extdata", "esa", package = "satres")
-sr <- satres(dir = esa, only_bands = FALSE)
+sr <- satres(dir = esa, only_spectral = FALSE)
 r <- sr |>
      get_band_names()
 
@@ -36,9 +36,8 @@ r <- sr |>
 \code{\link{sat_untarzip}}
 
 Other satellite definition: 
-\code{\link{get_all_names}()},
 \code{\link{get_spatial_resolution}()},
-\code{\link{get_spectral_resolution}()},
+\code{\link{get_spectral_band_names}()},
 \code{\link{satres}()}
 }
 \concept{satellite definition}

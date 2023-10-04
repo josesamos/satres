@@ -31,9 +31,8 @@ r <- sr |>
 \code{\link{sat_untarzip}}
 
 Other satellite definition: 
-\code{\link{get_all_names}()},
 \code{\link{get_band_names}()},
-\code{\link{get_spectral_resolution}()},
+\code{\link{get_spectral_band_names}()},
 \code{\link{satres}()}
 }
 \concept{satellite definition}

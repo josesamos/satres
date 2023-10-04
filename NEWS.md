@@ -1,6 +1,7 @@
 # satres (development version)
 * Functions to transform an object: `clip_bands()`.
-* Functions to query an object: `get_spectral_resolution()`, `get_all_names()`, `get_band_names()`.
+* Functions to query an object: `get_band_names()`, `get_spectral_band_names()`.
+* Change `satres()` parameter `only_bands` to `only_spectral` to avoid ambiguity.
 * Fix typos in the documentation. 
 
 # satres 1.0.0

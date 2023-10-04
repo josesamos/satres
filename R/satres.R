@@ -21,11 +21,11 @@
 #'
 #' A working folder where the virtual rasters are created can be indicated as a
 #' parameter. Additionally, we indicate whether we wish to process only the
-#' bands (B1 to B12) or all available files.
+#' spectral band files (B1 to B12) or all available files.
 #'
 #' @param dir A string or string vector, folder names.
 #' @param out_dir A string, output folder.
-#' @param only_bands A boolean, include only satellite bands.
+#' @param only_spectral A boolean, include only spectral bands.
 #'
 #' @return A `satres` object.
 #'
@@ -40,10 +40,10 @@
 #'
 #' sr <- satres(dir = esa,
 #'              out_dir = tempdir(),
-#'              only_bands = FALSE)
+#'              only_spectral = FALSE)
 #'
 #' @export
-satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
+satres <- function(dir, out_dir = NULL, only_spectral = TRUE) {
   files <- NULL
   for (d in dir) {
     lf <-
@@ -63,7 +63,7 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
     out_dir <- paste0(dir, '/', sub_dir)
   }
   b_r <- select_band_files(files)
-  if (only_bands) {
+  if (only_spectral) {
     files <- b_r[['band']]
   } else {
     files <- c(b_r[['band']], b_r[['rest']])
@@ -141,44 +141,7 @@ get_spatial_resolution.satres <- function(sr) {
 }
 
 
-#' Get spectral resolutions
-#'
-#' Returns the spectral resolutions of the multi-band raster that make up the
-#' object or, what is the same, the band names.
-#'
-#' We can indicate the name of a certain spatial resolution to obtain only its
-#' band names.
-#'
-#' @param sr A `satres` object.
-#' @param res A string, spatial resolution.
-#'
-#' @return A vector of strings.
-#'
-#' @family satellite definition
-#' @seealso \code{\link{sat_untarzip}}
-#'
-#' @examples
-#'
-#' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa)
-#'
-#' r <- sr |>
-#'      get_spectral_resolution()
-#'
-#' @export
-get_spectral_resolution <- function(sr, res)
-  UseMethod("get_spectral_resolution")
-
-
-#' @rdname get_spectral_resolution
-#' @export
-get_spectral_resolution.satres <- function(sr, res = NULL) {
-  get_band_names(sr, res)
-}
-
-
-
-#' Get all names
+#' Get band names
 #'
 #' Returns all names of the multi-band raster that make up the object.
 #'
@@ -196,17 +159,17 @@ get_spectral_resolution.satres <- function(sr, res = NULL) {
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa, only_bands = FALSE)
+#' sr <- satres(dir = esa, only_spectral = FALSE)
 #' r <- sr |>
-#'      get_all_names()
+#'      get_band_names()
 #'
 #' @export
-get_all_names <- function(sr, res)
-  UseMethod("get_all_names")
+get_band_names <- function(sr, res)
+  UseMethod("get_band_names")
 
-#' @rdname get_all_names
+#' @rdname get_band_names
 #' @export
-get_all_names.satres <- function(sr, res = NULL) {
+get_band_names.satres <- function(sr, res = NULL) {
   res <- check_spatial_resolution(sr, res)
   b <- NULL
   for (r in res) {
@@ -234,19 +197,19 @@ get_all_names.satres <- function(sr, res = NULL) {
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa, only_bands = FALSE)
+#' sr <- satres(dir = esa, only_spectral = FALSE)
 #' r <- sr |>
-#'      get_band_names()
+#'      get_spectral_band_names()
 #'
 #' @export
-get_band_names <- function(sr, res)
-  UseMethod("get_band_names")
+get_spectral_band_names <- function(sr, res)
+  UseMethod("get_spectral_band_names")
 
 
-#' @rdname get_band_names
+#' @rdname get_spectral_band_names
 #' @export
-get_band_names.satres <- function(sr, res = NULL) {
-  b <- get_all_names(sr, res)
+get_spectral_band_names.satres <- function(sr, res = NULL) {
+  b <- get_band_names(sr, res)
   sbn <- sat_band_names()
   sort(intersect(b, sbn))
 }

@@ -1,9 +1,7 @@
 test_that("as_SpatRaster()", {
   expect_equal({
     esa <- system.file("extdata", "esa", package = "satres")
-    sr <- satres(dir = esa,
-                 out_dir = tempdir(),
-                 only_bands = TRUE)
+    sr <- satres(dir = esa)
     r <- sr |>
       as_SpatRaster("r1000m")
     c(names(r),
@@ -35,9 +33,7 @@ test_that("as_SpatRaster()", {
 test_that("save_by_resolution()", {
   expect_equal({
     esa <- system.file("extdata", "esa", package = "satres")
-    sr <- satres(dir = esa,
-                 out_dir = tempdir(),
-                 only_bands = TRUE)
+    sr <- satres(dir = esa)
     r <- sr |>
       save_by_resolution(only_show_files = TRUE)
     basename(r)
