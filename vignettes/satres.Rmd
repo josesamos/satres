@@ -64,10 +64,10 @@ g <- system.file("extdata", "esa/g", package = "satres")
 
 To merge the satellite bands corresponding to the same geographical area (tiles) and classify them according to their spatial resolution, we only have to create an object of the `satres` class. We pass as a parameter the folder where the files are located.  We can also indicate a work folder as a parameter, where the virtual rasters will be created; if none is indicated, a temporary folder will be used.
 
-By default, only the satellite spectral bands (*B01* to *B12*) are considered. By setting the `only_spectral` parameter to `FALSE`, we can indicate that all raster files included in the folders that cover the area of interest are also treated, as shown in the code below.
+By default, only the satellite spectral bands (*B01* to *B12*) are considered. By setting the `only_spectral_bands` parameter to `FALSE`, we can indicate that all raster files included in the folders that cover the area of interest are also treated, as shown in the code below.
 
 ```{r, eval=FALSE}
-sr_all <- satres(dir = "esa", out_dir = "esa/out", only_spectral = FALSE)
+sr_all <- satres(dir = "esa", out_dir = "esa/out", only_spectral_bands = FALSE)
 ```
 
 For this case we only need the bands (*B01* to *B12*), which we then obtain from the data stored in this package.

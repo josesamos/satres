@@ -4,14 +4,14 @@
 \alias{satres}
 \title{\code{satres} S3 class}
 \usage{
-satres(dir, out_dir = NULL, only_spectral = TRUE)
+satres(dir, out_dir = NULL, only_spectral_bands = TRUE)
 }
 \arguments{
 \item{dir}{A string or string vector, folder names.}
 
 \item{out_dir}{A string, output folder.}
 
-\item{only_spectral}{A boolean, include only spectral bands.}
+\item{only_spectral_bands_bands}{A boolean, include only spectral bands.}
 }
 \value{
 A \code{satres} object.
@@ -39,7 +39,7 @@ sr <- satres(dir = esa)
 
 sr <- satres(dir = esa,
              out_dir = tempdir(),
-             only_spectral = FALSE)
+             only_spectral_bands = FALSE)
 
 }
 \seealso{

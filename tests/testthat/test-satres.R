@@ -3,7 +3,7 @@ test_that("satres()", {
     esa <- system.file("extdata", "esa/f", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = TRUE)
+                 only_spectral_bands = TRUE)
     c(
       names(sr$bands),
       names(sr$bands[["r1000m"]]),
@@ -75,7 +75,7 @@ test_that("satres()", {
     esa <- system.file("extdata", "esa/f", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = FALSE)
+                 only_spectral_bands = FALSE)
     c(
       names(sr$bands),
       names(sr$bands[["r1000m"]]),
@@ -214,7 +214,7 @@ test_that("satres()", {
     esa <- system.file("extdata", "esa", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = TRUE)
+                 only_spectral_bands = TRUE)
     c(
       names(sr$bands),
       names(sr$bands[["r1000m"]]),
@@ -285,7 +285,7 @@ test_that("satres()", {
     esa <- system.file("extdata", "esa", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = FALSE)
+                 only_spectral_bands = FALSE)
     c(
       names(sr$bands),
       names(sr$bands[["r1000m"]]),
@@ -425,7 +425,7 @@ test_that("get_spatial_resolution()", {
     esa <- system.file("extdata", "esa", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = TRUE)
+                 only_spectral_bands = TRUE)
     sr |>
       get_spatial_resolution()
   },
@@ -438,7 +438,7 @@ test_that("get_band_names()", {
     esa <- system.file("extdata", "esa", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = FALSE)
+                 only_spectral_bands = FALSE)
     sr |>
       get_band_names()
   },
@@ -481,7 +481,7 @@ test_that("get_band_names()", {
     esa <- system.file("extdata", "esa", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = FALSE)
+                 only_spectral_bands = FALSE)
     sr |>
       get_band_names("r1000m")
   },
@@ -499,12 +499,39 @@ test_that("get_band_names()", {
   ))
 })
 
+
+test_that("get_band_names()", {
+  expect_equal({
+    esa <- system.file("extdata", "esa", package = "satres")
+    sr <- satres(
+      dir = esa,
+      out_dir = tempdir(),
+      only_spectral_bands = TRUE
+    )
+    sr |>
+      get_band_names(c("r1000m", "r2000m"))
+  },
+  c(
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B11",
+    "B12",
+    "B8A"
+  ))
+})
+
 test_that("get_spectral_band_names()", {
   expect_equal({
     esa <- system.file("extdata", "esa", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = FALSE)
+                 only_spectral_bands = FALSE)
     sr |>
       get_spectral_band_names()
   },
@@ -529,7 +556,7 @@ test_that("get_spectral_band_names()", {
     esa <- system.file("extdata", "esa", package = "satres")
     sr <- satres(dir = esa,
                  out_dir = tempdir(),
-                 only_spectral = FALSE)
+                 only_spectral_bands = FALSE)
     sr |>
       get_spectral_band_names("r1000m")
   },

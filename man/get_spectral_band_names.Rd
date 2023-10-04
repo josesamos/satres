@@ -27,7 +27,7 @@ band names.
 \examples{
 
 esa <- system.file("extdata", "esa", package = "satres")
-sr <- satres(dir = esa, only_spectral = FALSE)
+sr <- satres(dir = esa, only_spectral_bands = FALSE)
 r <- sr |>
      get_spectral_band_names()
 

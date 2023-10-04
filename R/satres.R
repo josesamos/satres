@@ -25,7 +25,7 @@
 #'
 #' @param dir A string or string vector, folder names.
 #' @param out_dir A string, output folder.
-#' @param only_spectral A boolean, include only spectral bands.
+#' @param only_spectral_bands_bands A boolean, include only spectral bands.
 #'
 #' @return A `satres` object.
 #'
@@ -40,10 +40,10 @@
 #'
 #' sr <- satres(dir = esa,
 #'              out_dir = tempdir(),
-#'              only_spectral = FALSE)
+#'              only_spectral_bands = FALSE)
 #'
 #' @export
-satres <- function(dir, out_dir = NULL, only_spectral = TRUE) {
+satres <- function(dir, out_dir = NULL, only_spectral_bands = TRUE) {
   files <- NULL
   for (d in dir) {
     lf <-
@@ -63,7 +63,7 @@ satres <- function(dir, out_dir = NULL, only_spectral = TRUE) {
     out_dir <- paste0(dir, '/', sub_dir)
   }
   b_r <- select_band_files(files)
-  if (only_spectral) {
+  if (only_spectral_bands) {
     files <- b_r[['band']]
   } else {
     files <- c(b_r[['band']], b_r[['rest']])
@@ -159,7 +159,7 @@ get_spatial_resolution.satres <- function(sr) {
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa, only_spectral = FALSE)
+#' sr <- satres(dir = esa, only_spectral_bands = FALSE)
 #' r <- sr |>
 #'      get_band_names()
 #'
@@ -197,7 +197,7 @@ get_band_names.satres <- function(sr, res = NULL) {
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa, only_spectral = FALSE)
+#' sr <- satres(dir = esa, only_spectral_bands = FALSE)
 #' r <- sr |>
 #'      get_spectral_band_names()
 #'
@@ -278,18 +278,46 @@ find_name_to_files <- function(files, patterns) {
 #'
 #' @keywords internal
 check_spatial_resolution <-
-  function(sr,
-           res = NULL,
-           valid_null = TRUE) {
+  function(sr, res = NULL, valid_null = TRUE) {
     if (!valid_null) {
       stopifnot("A spatial resolution must be indicated." = !is.null(res))
     }
     if (is.null(res)) {
       res <- names(sr$bands)
     } else {
-      if (!(res %in% names(sr$bands))) {
-        stop(sprintf("The spatial resolution '%s' is not available.", res))
+      res <- unique(res)
+      for (r in res) {
+        if (!(r %in% names(sr$bands))) {
+          stop(sprintf("The spatial resolution '%s' is not available.", r))
+        }
       }
     }
     res
+  }
+
+
+#' Check band
+#'
+#' Check if the indicated band is one of those available.
+#'
+#' @param sr A `satres` object.
+#' @param res A string, spatial resolution.
+#' @param bands A string, band names.
+#'
+#' @return boolean.
+#'
+#' @keywords internal
+check_bands <- function(sr, res = NULL, bands = NULL) {
+    res_bands <- get_band_names(sr, res)
+    if (is.null(bands)) {
+      bands <- res_bands
+    } else {
+      bands <- unique(bands)
+      for (b in bands) {
+        if (!(b %in% res_bands)) {
+          stop(sprintf("The band '%s' is not available at the selected spatial resolutions.", b))
+        }
+      }
+    }
+    bands
   }
