@@ -27,7 +27,7 @@ the CRS of the bands.
 \examples{
 
 file <- system.file("extdata", "lanjaron.gpkg", package = "satres")
-lanjaron <- sf::st_read(file, layer = "lanjaron_bbox")
+lanjaron <- sf::st_read(file, layer = "lanjaron_bbox", quiet = TRUE)
 
 esa <- system.file("extdata", "esa", package = "satres")
 sr <- satres(dir = esa) |>

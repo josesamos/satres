@@ -432,3 +432,111 @@ test_that("get_spatial_resolution()", {
   c("r1000m", "r2000m", "r6000m"))
 })
 
+
+test_that("get_all_names()", {
+  expect_equal({
+    esa <- system.file("extdata", "esa", package = "satres")
+    sr <- satres(dir = esa,
+                 out_dir = tempdir(),
+                 only_bands = FALSE)
+    sr |>
+      get_all_names()
+  },
+  c(
+    "AOT",
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B11",
+    "B12",
+    "B8A",
+    "MSK_CLDPRB",
+    "MSK_DETFOO_B01",
+    "MSK_DETFOO_B02",
+    "MSK_DETFOO_B03",
+    "MSK_DETFOO_B04",
+    "MSK_DETFOO_B05",
+    "MSK_DETFOO_B06",
+    "MSK_DETFOO_B07",
+    "MSK_DETFOO_B08",
+    "MSK_DETFOO_B09",
+    "MSK_DETFOO_B10",
+    "MSK_DETFOO_B11",
+    "MSK_DETFOO_B12",
+    "MSK_DETFOO_B8A",
+    "MSK_SNWPRB",
+    "SCL",
+    "WVP"
+  ))
+})
+
+test_that("get_all_names()", {
+  expect_equal({
+    esa <- system.file("extdata", "esa", package = "satres")
+    sr <- satres(dir = esa,
+                 out_dir = tempdir(),
+                 only_bands = FALSE)
+    sr |>
+      get_all_names("r1000m")
+  },
+  c(
+    "AOT",
+    "B02",
+    "B03",
+    "B04",
+    "B08",
+    "MSK_DETFOO_B02",
+    "MSK_DETFOO_B03",
+    "MSK_DETFOO_B04",
+    "MSK_DETFOO_B08",
+    "WVP"
+  ))
+})
+
+test_that("get_band_names()", {
+  expect_equal({
+    esa <- system.file("extdata", "esa", package = "satres")
+    sr <- satres(dir = esa,
+                 out_dir = tempdir(),
+                 only_bands = FALSE)
+    sr |>
+      get_band_names()
+  },
+  c(
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B11",
+    "B12",
+    "B8A"
+  ))
+})
+
+test_that("get_band_names()", {
+  expect_equal({
+    esa <- system.file("extdata", "esa", package = "satres")
+    sr <- satres(dir = esa,
+                 out_dir = tempdir(),
+                 only_bands = FALSE)
+    sr |>
+      get_band_names("r1000m")
+  },
+  c(
+    "B02",
+    "B03",
+    "B04",
+    "B08"
+  ))
+})

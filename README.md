@@ -8,6 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/satres)](https://CRAN.R-project.org/package=satres)
 [![R-CMD-check](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml)
+[![Downloads](http://cranlogs.r-pkg.org/badges/satres?color=brightgreen)](http://www.r-pkg.org/pkg/satres)
 <!-- badges: end -->
 
 We frequently download files with satellite bands from the
@@ -40,9 +41,11 @@ characteristics:
 - *Landsat 4-5 TM C2 L1* (Landsat 4-5 Thematic Mapper Collection 2
   Level-1).
 
-- *Sentinel-2 MSI S2MSI1C* (Sentinel-2 Level-1C).
+- *Sentinel-2 MSI S2MSI1C* (Sentinel-2 Multi Spectral Instrument
+  Level-1C).
 
-- *Sentinel-2 MSI S2MSI2A* (Sentinel-2 Level-2A).
+- *Sentinel-2 MSI S2MSI2A* (Sentinel-2 Multi Spectral Instrument
+  Level-2A).
 
 ## Installation
 

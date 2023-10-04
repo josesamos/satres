@@ -6,9 +6,29 @@ test_that("as_SpatRaster()", {
                  only_bands = TRUE)
     r <- sr |>
       as_SpatRaster("r1000m")
-    names(r)
+    c(names(r),
+      terra::ncol(r),
+      terra::nrow(r),
+      terra::nlyr(r),
+      as.vector(round(terra::minmax(r, compute = FALSE), 2)))
   },
-  c("B02", "B03", "B04", "B08"))
+  c(
+    "B02",
+    "B03",
+    "B04",
+    "B08",
+    "110",
+    "210",
+    "4",
+    "1053.38",
+    "9115.54",
+    "1062.36",
+    "8836.69",
+    "1050.82",
+    "8734.01",
+    "1051.04",
+    "9087.86"
+  ))
 })
 
 

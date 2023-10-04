@@ -16,8 +16,7 @@
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa,
-#'              out_dir = tempdir())
+#' sr <- satres(dir = esa)
 #'
 #' r <- sr |>
 #'      as_SpatRaster("r1000m")
@@ -30,8 +29,8 @@ as_SpatRaster <- function(sr, res)
 #' @rdname as_SpatRaster
 #' @export
 as_SpatRaster.satres <- function(sr, res = NULL) {
-  stopifnot("A spatial resolution must be indicated." = !is.null(res))
-  stopifnot("The spatial resolution is not available." = res %in% names(sr$bands))
+  res <- check_spatial_resolution(sr, res, valid_null = FALSE)
+  res <- res[1]
   sr$bands[[res]]
 }
 

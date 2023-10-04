@@ -35,8 +35,7 @@ bands (B1 to B12) or all available files.
 
 esa <- system.file("extdata", "esa", package = "satres")
 
-sr <- satres(dir = esa,
-             out_dir = tempdir())
+sr <- satres(dir = esa)
 
 sr <- satres(dir = esa,
              out_dir = tempdir(),
@@ -47,6 +46,9 @@ sr <- satres(dir = esa,
 \code{\link{sat_untarzip}}
 
 Other satellite definition: 
-\code{\link{get_spatial_resolution}()}
+\code{\link{get_all_names}()},
+\code{\link{get_band_names}()},
+\code{\link{get_spatial_resolution}()},
+\code{\link{get_spectral_resolution}()}
 }
 \concept{satellite definition}

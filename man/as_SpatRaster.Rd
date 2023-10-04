@@ -24,8 +24,7 @@ of class \code{SpatRaster} from package \code{terra}
 \examples{
 
 esa <- system.file("extdata", "esa", package = "satres")
-sr <- satres(dir = esa,
-             out_dir = tempdir())
+sr <- satres(dir = esa)
 
 r <- sr |>
      as_SpatRaster("r1000m")
