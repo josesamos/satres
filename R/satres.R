@@ -29,7 +29,7 @@
 #'
 #' @return A `satres` object.
 #'
-#' @family satellite functions
+#' @family satellite definition
 #' @seealso \code{\link{sat_untarzip}}
 #'
 #' @examples
@@ -107,55 +107,6 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
 }
 
 
-#' Save multi-band rasters according to their spatial resolution
-#'
-#' Saves multi-band raster files of the object according to its spatial
-#' resolution. The file names correspond to the resolution of each one.
-#'
-#' They are stored in the folder that is indicated or, if none is indicated, in
-#' the folder that was used to create the object.
-#'
-#' @param sr A `satres` object.
-#' @param out_dir A string, output folder.
-#' @param only_show_files A boolean, only show the files that would be created,
-#' not create them.
-#'
-#' @return A vector of strings, name of the saved files.
-#'
-#' @family satellite functions
-#' @seealso \code{\link{sat_untarzip}}
-#'
-#' @examples
-#'
-#' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa)
-#' f <- sr |>
-#'      save_by_resolution(only_show_files = TRUE)
-#'
-#' @export
-save_by_resolution <- function(sr, out_dir, only_show_files)
-  UseMethod("save_by_resolution")
-
-
-#' @rdname save_by_resolution
-#' @export
-save_by_resolution.satres <- function(sr, out_dir = NULL, only_show_files = FALSE) {
-  if (is.null(out_dir)) {
-    out_dir <- sr$out_dir
-  }
-  nexus <- get_nexus(out_dir)
-  res <- NULL
-  for (n in names(sr$bands)) {
-    file <- paste0(out_dir, nexus, n, ".tif")
-    res <- c(res, file)
-    if (!only_show_files) {
-      terra::writeRaster(sr$bands[[n]], file, filetype = "GTiff", overwrite = TRUE)
-    }
-  }
-  res
-}
-
-
 #' Get spatial resolutions
 #'
 #' Returns the spatial resolutions of the multi-band raster that make up the object.
@@ -164,7 +115,7 @@ save_by_resolution.satres <- function(sr, out_dir = NULL, only_show_files = FALS
 #'
 #' @return A vector of strings.
 #'
-#' @family satellite functions
+#' @family satellite definition
 #' @seealso \code{\link{sat_untarzip}}
 #'
 #' @examples
@@ -187,87 +138,6 @@ get_spatial_resolution.satres <- function(sr) {
   names(sr$bands)
 }
 
-
-#' As `terra` `SpatRaster` class
-#'
-#' Returns the multi-band raster of the indicated spatial resolution as an object
-#' of class `SpatRaster` from package `terra`
-#'
-#' @param sr A `satres` object.
-#' @param res A string, spatial resolution.
-#'
-#' @return A vector of strings.
-#'
-#' @family satellite functions
-#' @seealso \code{\link{sat_untarzip}}
-#'
-#' @examples
-#'
-#' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa,
-#'              out_dir = tempdir())
-#'
-#' r <- sr |>
-#'      as_SpatRaster("r1000m")
-#'
-#' @export
-as_SpatRaster <- function(sr, res)
-  UseMethod("as_SpatRaster")
-
-
-#' @rdname as_SpatRaster
-#' @export
-as_SpatRaster.satres <- function(sr, res = NULL) {
-  stopifnot("A spatial resolution must be indicated." = !is.null(res))
-  stopifnot("The spatial resolution is not available." = res %in% names(sr$bands))
-  sr$bands[[res]]
-}
-
-
-#' Clip all the bands based on a polygon
-#'
-#' Clips all bands of each spatial resolution according to the given polygon.
-#'
-#' It performs the operation independently of the CRS of the polygon and preserves
-#' the CRS of the bands.
-#'
-#' @param sr A `satres` object.
-#' @param polygon A `sf` polygon layer.
-#'
-#' @return A `satres` object.
-#'
-#' @family object transformation
-#' @seealso \code{\link{satres}}
-#'
-#' @examples
-#'
-#' file <- system.file("extdata", "lanjaron.gpkg", package = "satres")
-#' lanjaron <- sf::st_read(file, layer = "lanjaron_bbox")
-#'
-#' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa) |>
-#'      clip_bands(polygon = lanjaron)
-#'
-#' @export
-clip_bands <- function(sr, polygon)
-  UseMethod("clip_bands")
-
-#' @rdname clip_bands
-#' @export
-clip_bands.satres <- function(sr, polygon) {
-  first <- TRUE
-  for (b in names(sr$bands)) {
-    if (first) {
-      s <- sf::st_transform(polygon, terra::crs(sr$bands[[b]]))
-      first <- FALSE
-    }
-    r <- terra::crop(sr$bands[[b]], s)
-    sr$bands[[b]] <- terra::mask(r, s)
-  }
-  sr$out_dir <- NULL
-  sr$virtual_files <- NULL
-  sr
-}
 
 
 #' Transforms a list of raster bands in a raster multi-band

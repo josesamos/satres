@@ -31,9 +31,7 @@ r <- sr |>
 \seealso{
 \code{\link{sat_untarzip}}
 
-Other satellite functions: 
-\code{\link{as_SpatRaster}()},
-\code{\link{satres}()},
-\code{\link{save_by_resolution}()}
+Other satellite definition: 
+\code{\link{satres}()}
 }
-\concept{satellite functions}
+\concept{satellite definition}

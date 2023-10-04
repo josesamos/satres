@@ -46,9 +46,7 @@ sr <- satres(dir = esa,
 \seealso{
 \code{\link{sat_untarzip}}
 
-Other satellite functions: 
-\code{\link{as_SpatRaster}()},
-\code{\link{get_spatial_resolution}()},
-\code{\link{save_by_resolution}()}
+Other satellite definition: 
+\code{\link{get_spatial_resolution}()}
 }
-\concept{satellite functions}
+\concept{satellite definition}
