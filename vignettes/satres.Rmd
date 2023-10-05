@@ -67,7 +67,7 @@ To merge the satellite bands corresponding to the same geographical area (tiles)
 By default, only the satellite spectral bands (*B01* to *B12*) are considered. By setting the `only_spectral_bands` parameter to `FALSE`, we can indicate that all raster files included in the folders that cover the area of interest are also treated, as shown in the code below.
 
 ```{r, eval=FALSE}
-sr_all <- satres(dir = "esa", out_dir = "esa/out", only_spectral_bands = FALSE)
+sr_all <- satres(dir = esa, only_spectral_bands = FALSE)
 ```
 
 For this case we only need the bands (*B01* to *B12*), which we then obtain from the data stored in this package.
