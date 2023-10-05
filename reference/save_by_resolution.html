@@ -26,6 +26,12 @@ resolution. The file names correspond to the resolution of each one."><meta prop
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/v10-transf.html">Selecting and transforming satellite bands</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -46,7 +52,7 @@ resolution. The file names correspond to the resolution of each one."><meta prop
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Save multi-band rasters according to their spatial resolution</h1>
-      <small class="dont-index">Source: <a href="https://github.com/josesamos/satres/blob/HEAD/R/satres.R" class="external-link"><code>R/satres.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/josesamos/satres/blob/HEAD/R/export.R" class="external-link"><code>R/export.R</code></a></small>
       <div class="d-none name"><code>save_by_resolution.Rd</code></div>
     </div>
 
@@ -92,10 +98,8 @@ the folder that was used to create the object.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="sat_untarzip.html">sat_untarzip</a></code></p>
-<p>Other satellite functions: 
-<code><a href="as_SpatRaster.html">as_SpatRaster</a>()</code>,
-<code><a href="get_spatial_resolution.html">get_spatial_resolution</a>()</code>,
-<code><a href="satres.html">satres</a>()</code></p></div>
+<p>Other satellite exportation: 
+<code><a href="as_SpatRaster.html">as_SpatRaster</a>()</code></p></div>
     </div>
 
     <div class="section level2">

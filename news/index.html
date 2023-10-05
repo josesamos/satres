@@ -24,6 +24,12 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/v10-transf.html">Selecting and transforming satellite bands</a>
+  </div>
+</li>
 <li class="active nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -49,10 +55,13 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="satres-development-version">satres (development version)<a class="anchor" aria-label="anchor" href="#satres-development-version"></a></h2>
-<ul><li>Fix typos in the documentation.</li>
+<ul><li>Transformation vignette.</li>
+<li>Functions to transform an object: <code><a href="../reference/clip_bands.html">clip_bands()</a></code>, <code><a href="../reference/select_bands.html">select_bands()</a></code>, <code><a href="../reference/merge_tiles.html">merge_tiles()</a></code>.</li>
+<li>Functions to query an object: <code><a href="../reference/get_band_names.html">get_band_names()</a></code>, <code><a href="../reference/get_spectral_band_names.html">get_spectral_band_names()</a></code>.</li>
+<li>Change <code><a href="../reference/satres.html">satres()</a></code> parameter <code>only_bands</code> to <code>only_spectral_bands</code> to avoid ambiguity.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0" id="satres-100">satres 1.0.0<a class="anchor" aria-label="anchor" href="#satres-100"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="satres-100">satres 1.0.0<a class="anchor" aria-label="anchor" href="#satres-100"></a></h2><p class="text-muted">CRAN release: 2023-10-03</p>
 <ul><li>Functionality for creating <code>satres</code> objects and exporting them.</li>
 <li>Initial CRAN submission.</li>
 </ul></div>

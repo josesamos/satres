@@ -24,6 +24,12 @@
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/v10-transf.html">Selecting and transforming satellite bands</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -54,7 +60,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">satres</span><span class="op">(</span><span class="va">dir</span>, out_dir <span class="op">=</span> <span class="cn">NULL</span>, only_bands <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">satres</span><span class="op">(</span><span class="va">dir</span>, out_dir <span class="op">=</span> <span class="cn">NULL</span>, only_spectral_bands <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -67,8 +73,8 @@
 <dd><p>A string, output folder.</p></dd>
 
 
-<dt>only_bands</dt>
-<dd><p>A boolean, include only satellite bands.</p></dd>
+<dt>only_spectral_bands</dt>
+<dd><p>A boolean, include only spectral bands.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -86,15 +92,15 @@ their spatial resolution.</p>
 them to form a single raster of the total area.</p>
 <p>A working folder where the virtual rasters are created can be indicated as a
 parameter. Additionally, we indicate whether we wish to process only the
-bands (B1 to B12) or all available files.</p>
+spectral band files (B1 to B12) or all available files.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="sat_untarzip.html">sat_untarzip</a></code></p>
-<p>Other satellite functions: 
-<code><a href="as_SpatRaster.html">as_SpatRaster</a>()</code>,
+<p>Other satellite definition: 
+<code><a href="get_band_names.html">get_band_names</a>()</code>,
 <code><a href="get_spatial_resolution.html">get_spatial_resolution</a>()</code>,
-<code><a href="save_by_resolution.html">save_by_resolution</a>()</code></p></div>
+<code><a href="get_spectral_band_names.html">get_spectral_band_names</a>()</code></p></div>
     </div>
 
     <div class="section level2">
@@ -102,12 +108,11 @@ bands (B1 to B12) or all available files.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">esa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"esa"</span>, package <span class="op">=</span> <span class="st">"satres"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu">satres</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">esa</span>,</span></span>
-<span class="r-in"><span>             out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu">satres</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">esa</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu">satres</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">esa</span>,</span></span>
 <span class="r-in"><span>             out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>             only_bands <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>             only_spectral_bands <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -16,6 +16,9 @@
     <loc>https://josesamos.github.io/satres/articles/satres.html</loc>
   </url>
   <url>
+    <loc>https://josesamos.github.io/satres/articles/v10-transf.html</loc>
+  </url>
+  <url>
     <loc>https://josesamos.github.io/satres/authors.html</loc>
   </url>
   <url>
@@ -28,7 +31,19 @@
     <loc>https://josesamos.github.io/satres/reference/as_SpatRaster.html</loc>
   </url>
   <url>
+    <loc>https://josesamos.github.io/satres/reference/check_bands.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/check_spatial_resolution.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/clip_bands.html</loc>
+  </url>
+  <url>
     <loc>https://josesamos.github.io/satres/reference/find_name_to_files.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/get_band_names.html</loc>
   </url>
   <url>
     <loc>https://josesamos.github.io/satres/reference/get_nexus.html</loc>
@@ -37,13 +52,31 @@
     <loc>https://josesamos.github.io/satres/reference/get_spatial_resolution.html</loc>
   </url>
   <url>
+    <loc>https://josesamos.github.io/satres/reference/get_spectral_band_names.html</loc>
+  </url>
+  <url>
     <loc>https://josesamos.github.io/satres/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/merge_tiles.html</loc>
   </url>
   <url>
     <loc>https://josesamos.github.io/satres/reference/sat_aggregate.html</loc>
   </url>
   <url>
     <loc>https://josesamos.github.io/satres/reference/sat_band.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/sat_band_names.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/sat_dimensions.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/sat_minmax.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/sat_names.html</loc>
   </url>
   <url>
     <loc>https://josesamos.github.io/satres/reference/sat_rest.html</loc>
@@ -62,6 +95,9 @@
   </url>
   <url>
     <loc>https://josesamos.github.io/satres/reference/select_band_files.html</loc>
+  </url>
+  <url>
+    <loc>https://josesamos.github.io/satres/reference/select_bands.html</loc>
   </url>
   <url>
     <loc>https://josesamos.github.io/satres/reference/transform_to_multiband.html</loc>

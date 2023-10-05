@@ -48,6 +48,12 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/v10-transf.html">Selecting and transforming satellite bands</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -163,13 +169,13 @@ only have to create an object of the <code>satres</code> class. We pass
 as a parameter the folder where the files are located. We can also
 indicate a work folder as a parameter, where the virtual rasters will be
 created; if none is indicated, a temporary folder will be used.</p>
-<p>By default, only the satellite bands (<em>B01</em> to <em>B12</em>)
-are considered. By setting the <code>only_bands</code> parameter to
-<code>FALSE</code>, we can indicate that all raster files included in
-the folders that cover the area of interest are also treated, as shown
-in the code below.</p>
+<p>By default, only the satellite spectral bands (<em>B01</em> to
+<em>B12</em>) are considered. By setting the
+<code>only_spectral_bands</code> parameter to <code>FALSE</code>, we can
+indicate that all raster files included in the folders that cover the
+area of interest are also treated, as shown in the code below.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sr_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/satres.html">satres</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="st">"esa"</span>, out_dir <span class="op">=</span> <span class="st">"esa/out"</span>, only_bands <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">sr_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/satres.html">satres</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">esa</span>, only_spectral_bands <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>For this case we only need the bands (<em>B01</em> to <em>B12</em>),
 which we then obtain from the data stored in this package.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
