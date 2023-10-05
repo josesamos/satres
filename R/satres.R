@@ -21,30 +21,29 @@
 #'
 #' A working folder where the virtual rasters are created can be indicated as a
 #' parameter. Additionally, we indicate whether we wish to process only the
-#' bands (B1 to B12) or all available files.
+#' spectral band files (B1 to B12) or all available files.
 #'
 #' @param dir A string or string vector, folder names.
 #' @param out_dir A string, output folder.
-#' @param only_bands A boolean, include only satellite bands.
+#' @param only_spectral_bands A boolean, include only spectral bands.
 #'
 #' @return A `satres` object.
 #'
-#' @family satellite functions
+#' @family satellite definition
 #' @seealso \code{\link{sat_untarzip}}
 #'
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
 #'
-#' sr <- satres(dir = esa,
-#'              out_dir = tempdir())
+#' sr <- satres(dir = esa)
 #'
 #' sr <- satres(dir = esa,
 #'              out_dir = tempdir(),
-#'              only_bands = FALSE)
+#'              only_spectral_bands = FALSE)
 #'
 #' @export
-satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
+satres <- function(dir, out_dir = NULL, only_spectral_bands = TRUE) {
   files <- NULL
   for (d in dir) {
     lf <-
@@ -58,10 +57,13 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
     files <- c(files, lf)
   }
   if (is.null(out_dir)) {
-    out_dir <- tempdir()
+    dir <- tempdir()
+    sub_dir <- snakecase::to_snake_case(paste0(Sys.time()))
+    dir.create(file.path(dir, sub_dir))
+    out_dir <- paste0(dir, '/', sub_dir)
   }
   b_r <- select_band_files(files)
-  if (only_bands) {
+  if (only_spectral_bands) {
     files <- b_r[['band']]
   } else {
     files <- c(b_r[['band']], b_r[['rest']])
@@ -75,8 +77,9 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
   names_1layer <- NULL
   resolution <- NULL
   for (n in names) {
-    f <- paste0(out_dir, nexus, n, ".vrt")
-    vf <- c(vf, f)
+    vfn <- paste0(n, ".vrt")
+    f <- paste0(out_dir, nexus, vfn)
+    vf <- c(vf, vfn)
     t <- terra::vrt(files[names(files) == n], f, overwrite = TRUE)
     # only tiles of the same raster
     if (terra::nlyr(t) == 1) {
@@ -107,55 +110,6 @@ satres <- function(dir, out_dir = NULL, only_bands = TRUE) {
 }
 
 
-#' Save multi-band rasters according to their spatial resolution
-#'
-#' Saves multi-band raster files of the object according to its spatial
-#' resolution. The file names correspond to the resolution of each one.
-#'
-#' They are stored in the folder that is indicated or, if none is indicated, in
-#' the folder that was used to create the object.
-#'
-#' @param sr A `satres` object.
-#' @param out_dir A string, output folder.
-#' @param only_show_files A boolean, only show the files that would be created,
-#' not create them.
-#'
-#' @return A vector of strings, name of the saved files.
-#'
-#' @family satellite functions
-#' @seealso \code{\link{sat_untarzip}}
-#'
-#' @examples
-#'
-#' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa)
-#' f <- sr |>
-#'      save_by_resolution(only_show_files = TRUE)
-#'
-#' @export
-save_by_resolution <- function(sr, out_dir, only_show_files)
-  UseMethod("save_by_resolution")
-
-
-#' @rdname save_by_resolution
-#' @export
-save_by_resolution.satres <- function(sr, out_dir = NULL, only_show_files = FALSE) {
-  if (is.null(out_dir)) {
-    out_dir <- sr$out_dir
-  }
-  nexus <- get_nexus(out_dir)
-  res <- NULL
-  for (n in names(sr$bands)) {
-    file <- paste0(out_dir, nexus, n, ".tif")
-    res <- c(res, file)
-    if (!only_show_files) {
-      terra::writeRaster(sr$bands[[n]], file, filetype = "GTiff", overwrite = TRUE)
-    }
-  }
-  res
-}
-
-
 #' Get spatial resolutions
 #'
 #' Returns the spatial resolutions of the multi-band raster that make up the object.
@@ -164,14 +118,13 @@ save_by_resolution.satres <- function(sr, out_dir = NULL, only_show_files = FALS
 #'
 #' @return A vector of strings.
 #'
-#' @family satellite functions
+#' @family satellite definition
 #' @seealso \code{\link{sat_untarzip}}
 #'
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa,
-#'              out_dir = tempdir())
+#' sr <- satres(dir = esa)
 #'
 #' r <- sr |>
 #'      get_spatial_resolution()
@@ -188,41 +141,81 @@ get_spatial_resolution.satres <- function(sr) {
 }
 
 
-#' As `terra` `SpatRaster` class
+#' Get band names
 #'
-#' Returns the multi-band raster of the indicated spatial resolution as an object
-#' of class `SpatRaster` from package `terra`
+#' Returns all names of the multi-band raster that make up the object.
+#'
+#' We can indicate the name of a certain spatial resolution to obtain only
+#' its names.
 #'
 #' @param sr A `satres` object.
 #' @param res A string, spatial resolution.
 #'
 #' @return A vector of strings.
 #'
-#' @family satellite functions
+#' @family satellite definition
 #' @seealso \code{\link{sat_untarzip}}
 #'
 #' @examples
 #'
 #' esa <- system.file("extdata", "esa", package = "satres")
-#' sr <- satres(dir = esa,
-#'              out_dir = tempdir())
-#'
+#' sr <- satres(dir = esa, only_spectral_bands = FALSE)
 #' r <- sr |>
-#'      as_SpatRaster("r1000m")
+#'      get_band_names()
 #'
 #' @export
-as_SpatRaster <- function(sr, res)
-  UseMethod("as_SpatRaster")
+get_band_names <- function(sr, res)
+  UseMethod("get_band_names")
 
-
-#' @rdname as_SpatRaster
+#' @rdname get_band_names
 #' @export
-as_SpatRaster.satres <- function(sr, res = NULL) {
-  stopifnot("A spatial resolution must be indicated." = !is.null(res))
-  stopifnot("The spatial resolution is not available." = res %in% names(sr$bands))
-  sr$bands[[res]]
+get_band_names.satres <- function(sr, res = NULL) {
+  res <- check_spatial_resolution(sr, res)
+  b <- NULL
+  for (r in res) {
+    b <- c(b, names(sr$bands[[r]]))
+  }
+  sort(unique(b))
 }
 
+
+#' Get band names
+#'
+#' Returns the band names of the multi-band raster that make up the object.
+#'
+#' We can indicate the name of a certain spatial resolution to obtain only its
+#' band names.
+#'
+#' @param sr A `satres` object.
+#' @param res A string, spatial resolution.
+#'
+#' @return A vector of strings.
+#'
+#' @family satellite definition
+#' @seealso \code{\link{sat_untarzip}}
+#'
+#' @examples
+#'
+#' esa <- system.file("extdata", "esa", package = "satres")
+#' sr <- satres(dir = esa, only_spectral_bands = FALSE)
+#' r <- sr |>
+#'      get_spectral_band_names()
+#'
+#' @export
+get_spectral_band_names <- function(sr, res)
+  UseMethod("get_spectral_band_names")
+
+
+#' @rdname get_spectral_band_names
+#' @export
+get_spectral_band_names.satres <- function(sr, res = NULL) {
+  b <- get_band_names(sr, res)
+  sbn <- sat_band_names()
+  sort(intersect(b, sbn))
+}
+
+
+################################################################
 
 #' Transforms a list of raster bands in a raster multi-band
 #'
@@ -250,35 +243,6 @@ transform_to_multiband <- function(bands) {
 }
 
 
-#' Select band files
-#'
-#' Select the files that correspond to the band selection. Each one is assigned
-#' the band identifier as a name.
-#'
-#' @param files A string vector.
-#'
-#' @return A list of string vectors.
-#'
-#' @keywords internal
-select_band_files <- function(files) {
-  names(files) <- NA
-  sel <- rep(FALSE, length(files))
-  for (i in 1:length(sat_rest_msk)) {
-    r <- grepl(sat_rest_msk[i], files, fixed = TRUE)
-    if (sum(r) > 0) {
-      sel <- sel | r
-    }
-  }
-  band <- files[!sel]
-  rest <- files[sel]
-  band <- find_name_to_files(band, sat_band)
-  rest <- find_name_to_files(rest, sat_rest)
-  l <- list(band, rest)
-  names(l) <- c('band', 'rest')
-  l
-}
-
-
 #' Find name to files
 #'
 #' Finds the name associated to a file name in a vector of named patterns.
@@ -301,3 +265,59 @@ find_name_to_files <- function(files, patterns) {
   names(files) <- fn
   files
 }
+
+#' Check spatial resolution
+#'
+#' Check if the indicated spatial resolution is one of those available.
+#'
+#' @param sr A `satres` object.
+#' @param res A string, spatial resolution.
+#' @param valid_null A boolean, resolution can be null.
+#'
+#' @return A string, spatial resolution.
+#'
+#' @keywords internal
+check_spatial_resolution <-
+  function(sr, res = NULL, valid_null = TRUE) {
+    if (!valid_null) {
+      stopifnot("A spatial resolution must be indicated." = !is.null(res))
+    }
+    if (is.null(res)) {
+      res <- names(sr$bands)
+    } else {
+      res <- unique(res)
+      for (r in res) {
+        if (!(r %in% names(sr$bands))) {
+          stop(sprintf("The spatial resolution '%s' is not available.", r))
+        }
+      }
+    }
+    res
+  }
+
+
+#' Check band
+#'
+#' Check if the indicated band is one of those available.
+#'
+#' @param sr A `satres` object.
+#' @param res A string, spatial resolution.
+#' @param bands A string, band names.
+#'
+#' @return boolean.
+#'
+#' @keywords internal
+check_bands <- function(sr, res = NULL, bands = NULL) {
+    res_bands <- get_band_names(sr, res)
+    if (is.null(bands)) {
+      bands <- res_bands
+    } else {
+      bands <- unique(bands)
+      for (b in bands) {
+        if (!(b %in% res_bands)) {
+          stop(sprintf("The band '%s' is not available at the selected spatial resolutions.", b))
+        }
+      }
+    }
+    bands
+  }

@@ -21,8 +21,7 @@ Returns the spatial resolutions of the multi-band raster that make up the object
 \examples{
 
 esa <- system.file("extdata", "esa", package = "satres")
-sr <- satres(dir = esa,
-             out_dir = tempdir())
+sr <- satres(dir = esa)
 
 r <- sr |>
      get_spatial_resolution()
@@ -31,9 +30,9 @@ r <- sr |>
 \seealso{
 \code{\link{sat_untarzip}}
 
-Other satellite functions: 
-\code{\link{as_SpatRaster}()},
-\code{\link{satres}()},
-\code{\link{save_by_resolution}()}
+Other satellite definition: 
+\code{\link{get_band_names}()},
+\code{\link{get_spectral_band_names}()},
+\code{\link{satres}()}
 }
-\concept{satellite functions}
+\concept{satellite definition}

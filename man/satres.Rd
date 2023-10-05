@@ -4,14 +4,14 @@
 \alias{satres}
 \title{\code{satres} S3 class}
 \usage{
-satres(dir, out_dir = NULL, only_bands = TRUE)
+satres(dir, out_dir = NULL, only_spectral_bands = TRUE)
 }
 \arguments{
 \item{dir}{A string or string vector, folder names.}
 
 \item{out_dir}{A string, output folder.}
 
-\item{only_bands}{A boolean, include only satellite bands.}
+\item{only_spectral_bands}{A boolean, include only spectral bands.}
 }
 \value{
 A \code{satres} object.
@@ -29,26 +29,25 @@ them to form a single raster of the total area.
 
 A working folder where the virtual rasters are created can be indicated as a
 parameter. Additionally, we indicate whether we wish to process only the
-bands (B1 to B12) or all available files.
+spectral band files (B1 to B12) or all available files.
 }
 \examples{
 
 esa <- system.file("extdata", "esa", package = "satres")
 
-sr <- satres(dir = esa,
-             out_dir = tempdir())
+sr <- satres(dir = esa)
 
 sr <- satres(dir = esa,
              out_dir = tempdir(),
-             only_bands = FALSE)
+             only_spectral_bands = FALSE)
 
 }
 \seealso{
 \code{\link{sat_untarzip}}
 
-Other satellite functions: 
-\code{\link{as_SpatRaster}()},
+Other satellite definition: 
+\code{\link{get_band_names}()},
 \code{\link{get_spatial_resolution}()},
-\code{\link{save_by_resolution}()}
+\code{\link{get_spectral_band_names}()}
 }
-\concept{satellite functions}
+\concept{satellite definition}
