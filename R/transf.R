@@ -117,6 +117,47 @@ merge_tiles <- function(sr, ...)
 #' @export
 merge_tiles.satres <- function(sr, ...) {
   x <- list(...)
-  x[[1]]
+  if (length(x) > 0) {
+    res <- names(sr$bands)
+    for (i in 1:length(x)) {
+      sr2 <- x[[i]]
+      if (length(setdiff(res, names(sr2$bands))) != 0) {
+        stop("All objects must have the same spatial resolution.")
+      }
+      for (r in res) {
+        if (length(setdiff(names(sr$bands[[r]]), names(sr2$bands[[r]]))) != 0) {
+          stop("All objects must have the same bands.")
+        }
+        if (terra::crs(sr$bands[[r]]) != terra::crs(sr2$bands[[r]])) {
+          stop("All objects must have the same CRS.")
+        }
+      }
+    }
+    result <- vector(mode = "list", length = length(res))
+    names(result) <- res
+    for (r in res) {
+      res_bands <- vector(mode = "list", length = length(names(sr$bands[[r]])))
+      names(res_bands) <- names(sr$bands[[r]])
+      for (b in names(sr$bands[[r]])) {
+        inst <- sprintf("terra::sprc(sr$bands[['%s']][['%s']]", r, b)
+        for (i in 1:length(x)) {
+          inst <-
+            paste0(inst, sprintf(", x[[%d]]$bands[['%s']][['%s']]", i, r, b))
+        }
+        inst <- paste0(inst, ")")
+        srcollection <- eval(parse(text = inst))
+        res_bands[[b]] <- terra::merge(srcollection)
+      }
+      result[[r]] <- transform_to_multiband(res_bands)
+    }
+    structure(list(
+      bands = result,
+      out_dir = NULL,
+      virtual_files = NULL
+    ),
+    class = "satres")
+  } else {
+    sr
+  }
 }
 

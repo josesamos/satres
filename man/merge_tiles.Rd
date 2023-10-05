@@ -25,10 +25,11 @@ The objects must have the same CRS, spatial resolution and bands.
 }
 \examples{
 
-esa <- system.file("extdata", "esa", package = "satres")
-sr2 <- satres(dir = "esa/f")
-sr <- satres(dir = "esa/g") |>
-     merge_tiles(sr2)
+esa_f <- system.file("extdata", "esa/f", package = "satres")
+esa_g <- system.file("extdata", "esa/g", package = "satres")
+sr2 <- satres(dir = esa_f)
+sr <- satres(dir = esa_g) |>
+  merge_tiles(sr2)
 
 }
 \seealso{
