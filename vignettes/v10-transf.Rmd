@@ -234,6 +234,12 @@ terra::plot(sf::st_geometry(lanjaron), add = TRUE)
 
 The raster layer has such a coarse granularity because of the transformation we performed to be able to store it in the package.
 
+To show the bands available at the selected spatial resolution, we represent them graphically below.
+
+```{r bands}
+terra::plot(r_lanjaron_1000m)
+```
+
 
 # Conclusion
 
