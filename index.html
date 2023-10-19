@@ -90,6 +90,7 @@
 </div>
 <!-- badges: start -->
 
+<!-- [![Downloads](http://cranlogs.r-pkg.org/badges/satres?color=brightgreen)](https://www.r-pkg.org:443/pkg/satres) -->
 <p>We frequently download files with satellite bands from the <a href="https://dataspace.copernicus.eu/" class="external-link"><em>ESA</em></a> and <a href="https://glovis.usgs.gov/" class="external-link"><em>USGS</em></a> websites to perform data analysis, transform them or store them in DBMS. They are downloaded as files in ZIP or TAR format. In some cases, it is necessary to download several files that cover the study area, so the first operation to perform is to merge the bands. To access the bands we have to explicitly indicate the name and location of their files.</p>
 <p>The goal of <code>satres</code> (<em>sat</em>ellite spectral and spatial <em>res</em>olution) is to partially automate these operations. It is enough to indicate the folder that contains the decompressed files: Satellite bands are automatically obtained by name (spectral) and spatial resolution; if we have several files to cover a geographical area, the corresponding bands are automatically merged. The result can be stored on disk and can also be obtained as objects of class <code>SpatRaster</code>, from package <a href="https://CRAN.R-project.org/package=terra" class="external-link"><code>terra</code></a>.</p>
 <p>Currently supports files obtained from the following sources and characteristics:</p>
@@ -186,7 +187,6 @@
 <li><a href="https://CRAN.R-project.org/package=satres" class="external-link"><img src="https://www.r-pkg.org/badges/version/satres" alt="CRAN status"></a></li>
 <li><a href="https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/josesamos/satres?branch=main" class="external-link"><img src="https://codecov.io/gh/josesamos/satres/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.r-pkg.org:443/pkg/satres" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/satres?color=brightgreen" alt="Downloads"></a></li>
 </ul>
 </div>
 
