@@ -1,4 +1,4 @@
-# satres (development version)
+# satres 1.1.0
 * Transformation vignette.
 * Functions to transform an object: `clip_bands()`, `select_bands()`, `merge_tiles()`.
 * Functions to query an object: `get_band_names()`, `get_spectral_band_names()`.
