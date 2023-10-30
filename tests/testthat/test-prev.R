@@ -51,3 +51,24 @@ test_that("sat_untarzip()", {
   },
   c("a/b/f.tar to e/", "c/d/g.zip to e/"))
 })
+
+
+test_that("sat_untarzip()", {
+  file <- system.file("extdata", package = "satres")
+  out_dir <- tempdir()
+  res <- sat_untarzip(file, out_dir)
+
+  expect_equal({
+    all(c("satres", "satres.txt") %in% list.files(out_dir))
+  },
+  TRUE)
+
+  expect_equal({
+    basename(res)
+  },
+  c("satres.tar",
+    "satres.zip"
+  ))
+
+})
+
