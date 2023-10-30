@@ -1,3 +1,5 @@
+# satres (development version)
+
 # satres 1.1.0
 * Transformation vignette.
 * Functions to transform an object: `clip_bands()`, `select_bands()`, `merge_tiles()`.
