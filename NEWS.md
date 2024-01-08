@@ -1,4 +1,4 @@
-# satres (development version)
+# satres 1.1.1
 * Modify the cph field of the description.
 * Update the readme file.
 
