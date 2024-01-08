@@ -6,10 +6,10 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-4457-3439")),
     person("Universidad de Granada", role = "cph")
   )
-Description: Given raster files directly downloaded from various websites, it
-    generates a raster structure where it merges them if they are tiles of the
-    same scene and classifies them according to their spectral and spatial
-    resolution for easy access by name.
+Description: Given raster files directly downloaded from various websites,
+    it generates a raster structure where it merges them if they are tiles
+    of the same scene and classifies them according to their spectral and
+    spatial resolution for easy access by name.
 License: MIT + file LICENSE
 URL: https://josesamos.github.io/satres/,
     https://github.com/josesamos/satres
