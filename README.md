@@ -10,7 +10,8 @@ status](https://www.r-pkg.org/badges/version/satres)](https://CRAN.R-project.org
 [![R-CMD-check](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/josesamos/satres/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/josesamos/satres/branch/main/graph/badge.svg)](https://app.codecov.io/gh/josesamos/satres?branch=main)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/satres?color=brightgreen)](https://www.r-pkg.org:443/pkg/satres)
+[![CRAN
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/satres)](https://cran.r-project.org/package=satres)
 <!-- badges: end -->
 
 We frequently download files with satellite bands from the
